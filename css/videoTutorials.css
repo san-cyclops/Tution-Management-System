@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,400;1,500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500&display=swap");
+
+* * {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: all 0.2s linear;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  overflow-x: hidden;
+}
+.video-tutorials {
+  position: relative;
+  top: 4rem;
+  height: 100%;
+  width: 100vw;
+  left: 18rem;
+  /* display: flex;
+  flex-flow: column; */
+  /* width: calc(100% - 18rem); */
+  transition: all 0.5s ease;
+  padding: 0 32px;
+  margin: 0;
+  /* background: black; */
+}
+.sidebar.close ~ .video-tutorials {
+  left: 6rem;
+  width: calc(100% - 5rem);
+}
+.video-tutorials img {
+  width: 100%;
+}
+.video-tutorials h1 {
+  font-size: 3rem;
+  font: 600;
+  margin: 1rem 0;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.192);
+}
