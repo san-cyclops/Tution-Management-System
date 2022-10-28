@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- css style sheet -->
     <link rel="stylesheet" href="../css/pUser.css" />
-    <link rel="stylesheet" href="css\videoTutorials.css">
+    <link rel="stylesheet" href="css\class.css">
     <!-- font awesome file link -->
     <link
       rel="stylesheet"
@@ -17,14 +17,12 @@
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
-    <title>createClass</title>
+    <title>CreateClass</title>
   </head>
   <body>
     <div class="sidebar close">
       <div class="logo-details">
-        <a href="userP-Home.html" class="logo"
-          ><img src="../img/logo.png" alt="logo"
-        /></a>
+        <a href="userP-Home.html" class="logo"><img src="../img/logo.png" alt="logo" /></a>
         <span class="logo_name">LeArN</span>
       </div>
       <ul class="nav-links">
@@ -47,9 +45,9 @@
           </div>
           <ul class="sub-menu">
             <li class="link-name"><a href="#">Student</a></li>
-            <li><a href="#">Student Regitration</a></li>
-            <li><a href="#">Student Enrollment</a></li>
-            <li><a href="#">Student Update/Delete</a></li>
+            <li><a href="student_reg.html">Student Regitration</a></li>
+            <li><a href="studentEnrlmnt.html">Student Enrollment</a></li>
+            <li><a href="studentUpDlt.html">Student Update/Delete</a></li>
           </ul>
         </li>
         <li>
@@ -62,20 +60,20 @@
           </div>
           <ul class="sub-menu">
             <li class="link-name"><a href="#">Course</a></li>
-            <li><a href="#">Add Course</a></li>
-            <li><a href="#">Update/Delete Course</a></li>
+            <li><a href="addCourse.html">Add Course</a></li>
+            <li><a href="upDltCourse.html">Update/Delete Course</a></li>
           </ul>
         </li>
         <li>
           <div class="icon-link">
-            <a href="">
+            <a href="class.html">
               <i class="bx bxs-school"></i>
               <span class="link_name">Class</span>
             </a>
-            
+  
           </div>
           <ul class="sub-menu blank">
-            <li class="link-name"><a href="#">Class</a></li>
+            <li class="link-name"><a href="class.html">Class</a></li>
           </ul>
         </li>
         <li>
@@ -87,9 +85,23 @@
             <i class="bx bxs-chevron-down arrow"></i>
           </div>
           <ul class="sub-menu">
-            <li class="link-name"><a href="#">Notification</a></li>
-            <li><a href="#">Add Notification</a></li>
-            <li><a href="#">Update Notification</a></li>
+            <li class="link-name"><a href="notification.html">Notification</a></li>
+            <li><a href="notification.html">Add Notification</a></li>
+            <li><a href="upNotification.html">Update Notification</a></li>
+          </ul>
+        </li>
+        <li>
+          <div class="icon-link">
+            <a href="">
+              <i class="bx bx-bell"></i>
+              <span class="link_name">Tutor</span>
+            </a>
+            <i class="bx bxs-chevron-down arrow"></i>
+          </div>
+          <ul class="sub-menu">
+            <li class="link-name"><a href="#">Tutor</a></li>
+            <li><a href="lectureReg.html">Add Tutor</a></li>
+            <li><a href="lectureUpDlt.html">Update/ Delete Tutor</a></li>
           </ul>
         </li>
         <li>
@@ -102,8 +114,8 @@
           </div>
           <ul class="sub-menu">
             <li class="link-name"><a href="#">Files</a></li>
-            <li><a href="#">Upload Files</a></li>
-            <li><a href="#">Update/Delete Files</a></li>
+            <li><a href="addFiles.html">Upload Files</a></li>
+            <li><a href="upDltFiles.html">Update/Delete Files </a></li>
           </ul>
         </li>
         <li>
@@ -115,61 +127,63 @@
             <i class="bx bxs-chevron-down arrow"></i>
           </div>
           <ul class="sub-menu">
-            <li class="link-name"><a href="#">Staff</a></li>
-            <li><a href="#">Staff Regitration</a></li>
-            <li><a href="#">Staff Update/Delete</a></li>
+            <li class="link-name"><a href="#">Staff Regitration</a></li>
+            <li><a href="staffReg.html">Staff Regitration</a></li>
+            <li><a href="staffUpDlt.html">Update/Delete Staff</a></li>
           </ul>
         </li>
         <li>
           <div class="icon-link">
-            <a href="">
+            <a href="attendance.html">
               <i class="bx bx-calendar-check"></i>
               <span class="link_name">Attendance</span>
             </a>
-            <i class="bx bxs-chevron-down arrow"></i>
           </div>
           <ul class="sub-menu blank">
-            <li><a href="" class="link_name">Attendance</a></li>
+            <li class="link-name "><a href="attendance.html">Attendance</a></li>
           </ul>
-          </li>
+        </li>
         <li>
           <div class="icon-link">
-            <a href="">
+            <a href="Payment.html">
               <i class="bx bx-money"></i>
               <span class="link_name">Payment</span>
             </a>
           </div>
           <ul class="sub-menu blank">
-            <li><a href="" class="link_name">Payment</a></li>
+            <li><a href="Payment.html" class="link_name">Payment</a></li>
           </ul>
         </li>
+  
       </ul>
     </div>
     <header class="header">
       <div class="toggle">
-      <i class='bx bx-menu' ></i></div>
-       
+        <i class='bx bx-menu'></i>
+      </div>
+  
       <nav class="navbar">
-          <ul>
-            <li><a href=""><img src="../img/user2.jpg" alt=""></a></li>
-            <li><a href=""><i class="bx bx-bell"></i></a></li>
-            <li><a href="#"><i class='bx bx-log-out-circle'></i></a></li>
-            
-          </ul>
+        <ul>
+          <li><a href=""><img src="../img/user2.jpg" alt=""></a></li>
+          <li><a href=""><i class="bx bx-bell"></i></a></li>
+          <li><a href="#"><i class='bx bx-log-out-circle'></i></a></li>
+  
+        </ul>
         </div>
       </nav>
     </header>
-    <!-- Add Course section starts -->
+    <!-- Add class section starts -->
     
     <section class="createClass">
       <h1 class="headerAclz">Create Class</h1>
-      <form action="" method="post" name="createClass"></form>
+      <form action="" method="post" name="createClassF" class="createClassF">
+      <label for="courseId">Course ID:</label>
       <select name="courseId" id="courseId" class="courseId" required>
         <option value="p1">None</option>
         <option value="p2">PHY22-24T</option>
         <option value="p3">PHY23-25T</option>
         <option value="p4">PHY22R</option>
-      </select>
+      </select><br>
         <label for="classID">Class ID:</label>
         <input type="text" id="classID" name="classID"><br>
         <label for="className">Class Name:</label>
@@ -178,13 +192,13 @@
         <input type="datetime-local" name="classTD" id="classTD"><br>
         <label for="clzStatus">Status:</label>
         <select id="clzStatus" name="clzStatus">
-          <option value="Monday">Held</option>
-          <option value="Tuesday">Cancel</option>  
+          <option value="held">Held</option>
+          <option value="cancel">Cancel</option>  
         </select><br>
         
         <br>
 
-        <input type="submit" value="Submit">
+        <input type="submit" value="Creat Class">
 
 
 
@@ -192,7 +206,7 @@
       </form> 
           
     </section>
-    <!-- video tutorials section ends -->
+    <!-- Add class section ends -->
 
     
         

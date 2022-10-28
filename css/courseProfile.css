@@ -1,0 +1,55 @@
+.courseProfile {
+    position: relative;
+    top: 6rem;
+    max-width: calc(100% - 18rem);
+    max-height: 100%;
+    left: 18rem;
+    transition: all 0.5s ease;
+    background-color: rgba(255, 255, 255, 0.685);
+  }
+  .sidebar.close ~ .courseProfile {
+    left: 5rem;
+    max-width: calc(100% - 6rem);
+  }
+  .courseProfile .CourseDetails{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem auto;
+  }
+  .courseProfile .CourseDetails h1{
+    font-weight: 700;
+    font-size: 3rem;
+    margin: 1rem;
+  }
+  .courseProfile .CourseDetails img{
+    max-width: 500px;
+  }
+  .courseProfile .CourseDetails p{
+    font-weight: 300;
+    font-size: 1.2rem;
+    margin: 2rem;
+  }
+  .courseProfile .courseTutorials{
+    margin: 0 2rem;
+    
+  }
+  .courseProfile .courseTutorials ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    list-style: none;
+    margin-bottom: 5rem;
+  }
+  .courseProfile .courseTutorials ul li{
+    margin: 0 4rem;
+  }
+  .courseProfile .courseTutorials ul li i{
+    font-weight: 700;
+    font-size: 2rem;
+    text-align: center;
+    color: black;
+  }

@@ -21,6 +21,11 @@ body {
   position: relative;
   display: flex;
 }
+.userprofile::after{
+  content: "";
+  clear: both;
+  display: table;
+}
 .userprofile .userDetails {
   position: relative;
   top: 4rem;
@@ -63,7 +68,7 @@ body {
   margin: 5px;
 }
 .userprofile .dashbrdCorse .dashCourseLink img {
-  max-width: 300px;
+  max-width: 200px;
 }
 .userprofile .dashbrdCorse .dashCourseLink a {
   font-weight: 700;
