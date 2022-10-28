@@ -1,0 +1,59 @@
+.notes-download {
+    position: relative;
+    left: 18rem;
+    top: 4rem;
+    max-width: calc(100% - 18rem);
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 5rem;
+  }
+  .sidebar.close ~ .notes-download {
+    left: 5rem;
+    max-width: calc(100% - 6rem);
+  }
+  .notes-download .headerV {
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+  .notes-download .notes-container {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 100%;
+  }
+  .notes-download .notes-container .note {
+    margin: 2rem;
+  }
+  .notes-download .notes-container .note a i {
+    color: black;
+    font-size: 2rem;
+  }
+  .notes-download .notes-container .note a i span {
+    font-size: 1.2rem;
+    padding-left: 5px;
+    font-weight: 300;
+  }
+  .notes-download .notes-container .note a i:hover {
+    text-decoration: underline;
+    color: rgb(8, 162, 252);
+  }
+  .notes-download .notes-container .note a i:visited{
+    color: rgb(252, 45, 8);
+  }
+  @media (max-width: 600px) {
+    html {
+      font-size: 50%;
+    }
+    .notes-download {
+      left: 5rem;
+      max-width: calc(100% - 5rem);
+      z-index: 100;
+      margin: 2rem 0;
+    }
+    .sidebar.close ~ .notes-download{
+      left: 1rem;
+      max-width: 100%;
+    }
+  }
+  

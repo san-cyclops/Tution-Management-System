@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- css style sheet -->
+    <link rel="stylesheet" href="../css/pUser.css" />
+    <link rel="stylesheet" href="\css\studentDashboard.css" />
+
+    <!-- font awesome file link -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css"
+    />
+    <!-- Boxicons CSS -->
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <title>Student Portal</title>
+  </head>
+
+  <body>
+    <div class="sidebar close">
+      <div class="logo-details">
+        <a href="userP-Home.html" class="logo"
+          ><img src="../img/logo.png" alt="logo"
+        /></a>
+        <span class="logo_name">LeArN</span>
+      </div>
+      <ul class="nav-links">
+        <li>
+          <a href="">
+            <i class="bx bxs-grid"></i>
+            <span class="link_name">Dashboard</span>
+          </a>
+          <ul class="sub-menu blank">
+            <li><a href="" class="link_name">Dashboard</a></li>
+          </ul>
+        </li>
+        <li>
+          <div class="icon-link">
+            <a href="">
+              <i class="bx bx-file-blank"></i>
+              <span class="link_name">Physics</span>
+            </a>
+            <i class="bx bxs-chevron-down arrow"></i>
+          </div>
+          <ul class="sub-menu">
+            <li class="link-name"><a href="#">Learning Materials</a></li>
+            <li><a href="#">Video Tutorials</a></li>
+            <li><a href="#">Tuites</a></li>
+            <li><a href="#">Notes</a></li>
+          </ul>
+        </li>
+        <li>
+          <div class="icon-link">
+            <a href="">
+              <i class="bx bx-file-blank"></i>
+              <span class="link_name">Chemistry</span>
+            </a>
+            <i class="bx bxs-chevron-down arrow"></i>
+          </div>
+          <ul class="sub-menu">
+            <li class="link-name"><a href="#">Learning Materials</a></li>
+            <li><a href="#">Video Tutorials</a></li>
+            <li><a href="#">Tuites</a></li>
+            <li><a href="#">Notes</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <header class="header">
+      <div class="toggle">
+        <i class="bx bx-menu"></i>
+      </div>
+
+      <nav class="navbar">
+        <ul>
+          <li>
+            <a href=""><img src="../img/user2.jpg" alt="" /></a>
+          </li>
+          <li>
+            <i class="bx bx-bell">
+                <!-- <ul>
+                    <li><a class="notiName" href="">Saturday Physics Class Cancelation</a></li>
+                    <li><a class="notiName" href="">Saturday Physics Class Cancelation</a></li>
+                    <li><a class="notiName" href="">Saturday Physics Class Cancelation</a></li>
+                </ul> -->
+            </i>
+          </li>
+          <li>
+            <a href="#"><i class="bx bx-log-out-circle"></i></a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <!-- Dashboard section strats -->
+    <section class="dashboard">
+      <section class="userprofile">
+        <div class="userDetails">
+          <img
+            src="img\user1.jpg"
+            alt="user-profile-picture"
+            style="width: 100px"
+          />
+          <p class="studentName">Kumesha Ekanayake</p>
+          <p class="studentID">STDNT000001</p>
+          <p class="RFID">N7bn029356</p>
+        </div>
+        <div class="dashbrdCorse">
+          <h2>My Course</h2>
+          <div class="dashCourseLink">
+            <img src="img\thumbnail.jpg" alt="" class="CoursePic" />
+            <a href="" class="courseName" id="crse0001">Crse0001 - Physics</a>
+          </div>
+          <div class="dashCourseLink" id="crse0002">
+            <img src="img\thumbnail.jpg" alt="" class="CoursePic" />
+            <a href="" class="courseName" id="Crse0002">Crse0002 - Chemistry</a>
+          </div>
+          <div class="dashCourseLink" id="Crse0003">
+            <img src="img\thumbnail.jpg" alt="" class="CoursePic" />
+            <a href="" class="courseName" id="crse0003"
+              >Crse0003 - Combined Maths</a
+            >
+          </div>
+        </div>
+      </section>
+      <!-- Dashboard section ends -->
+
+      <!-- Notification section starts -->
+      <section class="notifocation">
+        <h3 class="headerN">Notifications</h3>
+        <div class="noti" id="noti001">
+          <h4 class="notiName">Saturday Physics Class Cancelation</h4>
+          <p class="notiDescription">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, ea
+            officia odio facere minima accusantium soluta numquam sint adipisci
+            veritatis.
+          </p>
+          <p class="notificationid">n29jsdyufa712</p>
+        </div>
+        <div class="noti" id="noti002">
+          <h4 class="notiName">Saturday Physics Class Cancelation</h4>
+          <p class="notiDescription">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, ea
+            officia odio facere minima accusantium soluta numquam sint adipisci
+            veritatis.
+          </p>
+          <p class="notificationid">n29jsdyufa712</p>
+        </div>
+        <div class="noti" id="noti003">
+          <h4 class="notiName">Saturday Physics Class Cancelation</h4>
+          <p class="notiDescription">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, ea
+            officia odio facere minima accusantium soluta numquam sint adipisci
+            veritatis.
+          </p>
+          <p class="notificationid">n29jsdyufa712</p>
+        </div>
+      </section>
+      <!-- Notification section starts -->
+    </section>
+
+    <!-- custom js file -->
+    <script src="js/userP.js"></script>
+  </body>
+</html>

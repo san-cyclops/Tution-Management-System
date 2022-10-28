@@ -14,30 +14,84 @@ html {
 body {
   overflow-x: hidden;
 }
+
 .video-tutorials {
   position: relative;
   top: 4rem;
   height: 100%;
-  width: 100vw;
+  max-width: calc(100% - 19rem);
   left: 18rem;
-  /* display: flex;
-  flex-flow: column; */
-  /* width: calc(100% - 18rem); */
+  display: flex;
+  flex-flow: column;
   transition: all 0.5s ease;
-  padding: 0 32px;
-  margin: 0;
-  /* background: black; */
+  margin-top: 2rem;
+  /* background-color: rgb(250, 112, 112); */
 }
-.sidebar.close ~ .video-tutorials {
-  left: 6rem;
-  width: calc(100% - 5rem);
-}
-.video-tutorials img {
-  width: 100%;
-}
-.video-tutorials h1 {
+.headerV {
   font-size: 3rem;
   font: 600;
-  margin: 1rem 0;
   border-bottom: 2px solid rgba(0, 0, 0, 0.192);
+  margin-bottom: 2rem;
+  margin-left: 1rem;
+}
+.sidebar.close ~ .video-tutorials {
+  left: 5rem;
+  max-width: calc(100% - 6rem);
+}
+.video-tutorials .mainVideo-content {
+  margin: 0 auto;
+}
+.video-tutorials .mainVideo-content .mainVideo {
+  max-width: 600px;
+  border-radius: 5px;
+  border: 2px solid black;
+  padding: 10px;
+}
+.video-tutorials .mainVideo-content .mainVideo video {
+  max-width: 100%;
+}
+.video-tutorials .mainVideo-content .mainVideo .title {
+  font-weight: 400;
+  font-size: 1.5rem;
+  border-top: 1px solid black;
+  margin-top: 1rem;
+}
+.video-tutorials .related-video {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 2rem auto;
+  border-top: 2px solid rgba(0, 0, 0, 0.192);
+  padding: 2rem;
+}
+.video-tutorials .related-video .video-list {
+  max-width: 250px;
+  margin: 2rem 2rem;
+  box-shadow: 0 5px 5px 5px rgba(0, 0, 0, 0.192);
+  
+}
+.video-tutorials .related-video .video-list video {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+.video-tutorials .related-video .video-list .title{
+  font-weight: 400;
+  font-size: 1rem;
+  border-top: 1px solid black;
+  margin-top: 1rem;
+}
+
+@media (max-width: 400px) {
+  html {
+    font-size: 45%;
+  }
+  .video-tutorials {
+    max-width: calc(100% - 5rem);
+    left: 5rem;
+  }
+  .sidebar.close ~ .video-tutorials {
+    left: 0;
+    max-width: 100%;
+    margin: 0 10px;
+  }
 }

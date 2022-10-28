@@ -1,0 +1,32 @@
+.attendance {
+    position: relative;
+    top: 4rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    max-width: calc(100% - 18rem);
+    left: 18rem;
+    transition: all 0.5s ease;
+    background-color: rgba(199, 199, 199, 0.685);
+  }
+  .sidebar.close ~ .attendance {
+    left: 5rem;
+    max-width: calc(100% - 6rem);
+  }
+  .attendance h1{
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: rgb(41, 41, 41);
+    margin-bottom: 2rem;
+    margin-left: 2rem;
+  }
+  .attendance label{
+    font-weight: 400;
+    font-size: 1.5rem;
+    padding-right: 10px;
+    margin: 2rem 2rem;
+  }
+  .attendance input[type="text"],select{
+    margin: 2rem 0;
+  }
+

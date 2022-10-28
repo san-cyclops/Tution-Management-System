@@ -1,0 +1,58 @@
+.tuite-download {
+  position: relative;
+  left: 18rem;
+  top: 4rem;
+  max-width: calc(100% - 18rem);
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 5rem;
+}
+.sidebar.close ~ .tuite-download {
+  left: 5rem;
+  max-width: calc(100% - 6rem);
+}
+.tuite-download .headerV {
+  font-weight: 700;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+.tuite-download .tuite-container {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+.tuite-download .tuite-container .tuite {
+  margin: 2rem;
+}
+.tuite-download .tuite-container .tuite a i {
+  color: black;
+  font-size: 2rem;
+}
+.tuite-download .tuite-container .tuite a i span {
+  font-size: 1.2rem;
+  padding-left: 5px;
+  font-weight: 300;
+}
+.tuite-download .tuite-container .tuite a i:hover {
+  text-decoration: underline;
+  color: rgb(8, 162, 252);
+}
+.tuite-download .tuite-container .tuite a i:visited {
+  color: rgb(252, 8, 8);
+}
+@media (max-width: 600px) {
+  html {
+    font-size: 50%;
+  }
+  .tuite-download {
+    left: 5rem;
+    max-width: calc(100% - 5rem);
+    z-index: 100;
+    margin: 2rem 0;
+  }
+  .sidebar.close ~ .tuite-download{
+    left: 1rem;
+    max-width: 100%;
+  }
+}
