@@ -1,0 +1,63 @@
+.filedetails {
+    position: relative;
+    top: 6rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    max-width: calc(100% - 18rem);
+    left: 18rem;
+    transition: all 0.5s ease;
+    /* background-color: rgba(199, 199, 199, 0.685); */
+  }
+  .sidebar.close ~ .filedetails {
+    left: 5rem;
+    max-width: calc(100% - 6rem);
+  }
+  .fileD {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 4rem;
+  }
+  .fileD label {
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-top: 20px;
+    color: rgb(0, 148, 74);
+  }
+  .fileD select {
+    max-width: 50%;
+    font-weight: 400;
+    font-size: 1.2rem;
+  }
+  .fileD input[type="submit"]{
+    max-width: 150px;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    border: 2px solid rgb(10, 151, 128);
+    color: rgb(2, 71, 71);
+  }
+  .displyFiles{
+    margin: 4rem;
+  }
+  
+  @media (max-width: 600px) {
+    html {
+      font-size: 50%;
+    }
+    .filedetails {
+      left: 5rem;
+      max-width: calc(100% - 5rem);
+      z-index: 100;
+      margin: 2rem 0;
+    }
+    .sidebar.close ~ .filedetails {
+      left: 0;
+      max-width: 100%;
+    }
+    .fileD select {
+      max-width: 75%;
+    }
+  }
+  

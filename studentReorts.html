@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- css style sheet -->
+    <link rel="stylesheet" href="../css/pUser.css" />
+    <link rel="stylesheet" href="css/studentReport.css" />
+
+    <!-- font awesome file link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" />
+    <!-- Boxicons CSS -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <title>Tutor Portal</title>
+</head>
+
+<body>
+    <div class="sidebar close">
+        <div class="logo-details">
+            <a href="userP-Home.html" class="logo"><img src="../img/logo.png" alt="logo" /></a>
+            <span class="logo_name">LeArN</span>
+        </div>
+        <ul class="nav-links">
+            <li>
+                <a href="">
+                    <i class="bx bxs-grid"></i>
+                    <span class="link_name">Dashboard</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a href="" class="link_name">Dashboard</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="icon-link">
+                    <a href="">
+                        <i class="bx bx-file-blank"></i>
+                        <span class="link_name">Reports</span>
+                    </a>
+                    <i class="bx bxs-chevron-down arrow"></i>
+                </div>
+                <ul class="sub-menu">
+                    <li class="link-name"><a href="#">Reports</a></li>
+                    <li><a href="#">Student Details</a></li>
+                    <li><a href="#">Files</a></li>
+                    <li><a href="#">Revenue Reports</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <header class="header">
+        <div class="toggle">
+            <i class="bx bx-menu"></i>
+        </div>
+
+        <nav class="navbar">
+            <ul>
+                <li>
+                    <a href=""><img src="../img/user2.jpg" alt="" /></a>
+                </li>
+                <li>
+                    <a href="#"><i class="bx bx-log-out-circle"></i></a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <!-- Student Report section strats -->
+    <section class="studentdetails">
+        <div class="studentD">
+        <label for="courseId">Course ID:</label>
+        <select name="courseId" id="courseId" class="courseId">
+            <option value="All">All</option>
+            <option value="p2">PHY22-24T</option>
+            <option value="p3">PHY23-25T</option>
+            <option value="p4">PHY22R</option>
+        </select>
+        <label for="classId">Class ID:</label>
+        <select name="classId" id="classId" class="classId">
+            <option value="All">All</option>
+            <option value="p2">PHY22-24T</option>
+            <option value="p3">PHY23-25T</option>
+            <option value="p4">PHY22R</option>
+        </select>
+        <label for="Type">Type:</label>
+        <select name="classId" id="classId" class="classId">
+            <option value="All">All</option>
+            <option value="sCount">Count</option>
+        </select>
+        <input type="submit" value="Search">
+    </div>
+        <hr>
+        <div class="displyDteails">
+            <h1>display details table here</h1>
+        </div>
+
+    </section>
+    <!-- Student Report ends -->
+    
+
+    <!-- custom js file -->
+    <script src="js/userP.js"></script>
+</body>
+
+</html>

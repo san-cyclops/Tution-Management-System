@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- css style sheet -->
+    <link rel="stylesheet" href="../css/pUser.css" />
+    <link rel="stylesheet" href="css/tutorDashboard.css" />
+
+    <!-- font awesome file link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" />
+    <!-- Boxicons CSS -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <title>Student Portal</title>
+</head>
+
+<body>
+    <div class="sidebar close">
+        <div class="logo-details">
+            <a href="userP-Home.html" class="logo"><img src="../img/logo.png" alt="logo" /></a>
+            <span class="logo_name">LeArN</span>
+        </div>
+        <ul class="nav-links">
+            <li>
+                <a href="">
+                    <i class="bx bxs-grid"></i>
+                    <span class="link_name">Dashboard</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a href="" class="link_name">Dashboard</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="icon-link">
+                    <a href="">
+                        <i class="bx bx-file-blank"></i>
+                        <span class="link_name">Reports</span>
+                    </a>
+                    <i class="bx bxs-chevron-down arrow"></i>
+                </div>
+                <ul class="sub-menu">
+                    <li class="link-name"><a href="#">Reports</a></li>
+                    <li><a href="studentReorts.html">Student Details</a></li>
+                    <li><a href="fileReport.html">Files</a></li>
+                    <li><a href="revenueReport.html">Revenue Reports</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <header class="header">
+        <div class="toggle">
+            <i class="bx bx-menu"></i>
+        </div>
+
+        <nav class="navbar">
+            <ul>
+                <li>
+                    <a href=""><img src="../img/user2.jpg" alt="" /></a>
+                </li>
+                <li>
+                    <a href="#"><i class="bx bx-log-out-circle"></i></a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <!-- Dashboard section strats -->
+    <section class="tutordashboard">
+        <section class="tutorprofile">
+            <div class="tutorDetails">
+                <img src="img\tutorAvator.jpg" alt="user-profile-picture" style="width: 100px" />
+                <p class="tutorName">Krishan Basnayake</p>
+                <p class="tutortID">tut000001</p>
+            </div>
+            <div class="tutorCourse">
+                <h2>My Course</h2>
+                <div class="dashCourseLink">
+                    <img src="img\thumbnail.jpg" alt="" class="CoursePic" />
+                    <a href="courseprofile.html" class="courseName" id="crse0001">Crse0001 -2020-2022 Physics Theory</a>
+                </div>
+                <div class="dashCourseLink" id="crse0002">
+                    <img src="img\thumbnail.jpg" alt="" class="CoursePic" />
+                    <a href="" class="courseName" id="Crse0004">Crse0005 -2022-2024 Physics Theory</a>
+                </div>
+                <div class="dashCourseLink" id="Crse0003">
+                    <img src="img\thumbnail.jpg" alt="" class="CoursePic" />
+                    <a href="" class="courseName" id="crse0009">Crse0009 -2022 Physics Revision</a>
+                </div>
+            </div>
+        </section>
+        <!-- Dashboard section ends -->
+    </section>
+
+    <!-- custom js file -->
+    <script src="js/userP.js"></script>
+</body>
+
+</html>
