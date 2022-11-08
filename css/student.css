@@ -1,0 +1,67 @@
+.studentSearch {
+    position: relative;
+    top: 6rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    max-width: calc(100% - 18rem);
+    left: 18rem;
+    transition: all 0.5s ease;
+    /* background-color: rgba(199, 199, 199, 0.685); */
+  }
+  .sidebar.close ~ .studentSearch {
+    left: 5rem;
+    max-width: calc(100% - 6rem);
+  }
+
+  #studentDSearch{
+    margin: 2rem;
+    margin-right: 0;
+    width: 50%;
+    padding: 5px;
+    border-radius: 10px;
+    border: 2px solid rgb(186, 115, 252);
+    color: rgb(136, 9, 255);
+  }
+  button{
+    color:rgb(136, 9, 255) ;
+    background-color: aliceblue;
+    padding: 5px 10px;
+    border: 2px solid rgb(186, 115, 252);
+    border-radius: 10px;
+  }
+  button:hover{
+    background-color: rgb(140, 140, 236);
+    color: rgb(255, 255, 255);
+  }
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    max-width: 100%;
+    margin: 2rem;
+    font-size: 1.2rem;
+  }
+  
+  td,
+  th {
+    border: 2px solid #d9a4f3;
+    text-align: left;
+    padding: 8px;
+    word-wrap: break-word;
+  }
+  @media (max-width: 600px) {
+    html {
+      font-size: 50%;
+    }
+    .studentSearch {
+      left: 5rem;
+      max-width: calc(100% - 5rem);
+      z-index: 100;
+      margin: 2rem 0;
+    }
+    .sidebar.close ~ .studentSearch {
+      left: 0;
+      max-width: 100%;
+    }
+  }
+  
