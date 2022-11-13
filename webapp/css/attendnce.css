@@ -1,0 +1,122 @@
+.attendance {
+  position: relative;
+  top: 4rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  max-width: calc(100% - 18rem);
+  left: 18rem;
+  transition: all 0.5s ease;
+  /* background-color: rgba(199, 199, 199, 0.685); */
+}
+.sidebar.close ~ .attendance {
+  left: 5rem;
+  max-width: calc(100% - 6rem);
+}
+.attendance h1 {
+  font-weight: 700;
+  font-size: 2.5rem;
+  color: rgb(41, 41, 41);
+  margin-bottom: 2rem;
+  margin-left: 2rem;
+}
+.attendance label {
+  font-weight: 400;
+  font-size: 1.5rem;
+  padding-right: 10px;
+  /* margin: 2rem 2rem; */
+}
+.attendance input[type="text"],
+select {
+  margin: 1rem 0;
+  max-width: 100%;
+}
+.attendance .clzDetails {
+  margin: 2rem;
+}
+.attendance .rfidTrack {
+  margin: 2rem;
+}
+.attendance .attendanceProcess {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.attendance .userdetails {
+  display: flex;
+  flex-direction: column;
+  margin: 0 2rem;
+  padding: 10px;
+ 
+}
+.attendance .userdetails img {
+  border: 1px solid black;
+  padding: 5px;
+  margin-bottom: 20px;
+}
+.attendance .payment-attendP {
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  /* background-color: black; */
+}
+.attendance .paymentDetails {
+  margin-bottom: 2rem;
+}
+.attendance .paymentDetails h1 {
+  font-weight: 700;
+  font-size: 3rem;
+}
+.attendance .paymentDetails .pymntD {
+  color: blue;
+  border-color:blue ;
+}
+.attendance .paymentDetails .pymntnD {
+  color: red;
+  border-color:red ;
+}
+.attendance .attendPermission {
+  margin: 2rem;
+}
+.attendance .attendPermission button {
+  padding: 20px;
+  margin: 2rem;
+  border: 1px solid black;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+#attendAllow:hover {
+  color: aliceblue;
+  background-color: rgb(36, 36, 253);
+}
+#attendDeny:hover {
+  color: aliceblue;
+  background-color: rgb(241, 33, 33);
+}
+@media (max-width: 600px) {
+  html {
+    font-size: 50%;
+  }
+  .attendance {
+    left: 5rem;
+    max-width: calc(100% - 5rem);
+    z-index: 100;
+    margin: 2rem 0;
+  }
+  .sidebar.close ~ .attendance {
+    left: 0;
+    max-width: 100%;
+  }
+  /* .attendance .attendanceProcess {
+    position: relative;
+    display: flex;
+
+  } */
+
+}

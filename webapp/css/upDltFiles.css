@@ -1,0 +1,97 @@
+.upDltFiles {
+  position: relative;
+  top: 4rem;
+  max-width: calc(100% - 18rem);
+  max-height: 100%;
+  left: 18rem;
+  transition: all 0.5s ease;
+  /* background-color: rgba(199, 199, 199, 0.685); */
+}
+.sidebar.close ~ .upDltFiles {
+  left: 5rem;
+  max-width: calc(100% - 6rem);
+}
+.upDltFiles h1 {
+  font-weight: 600;
+  font-size: 3rem;
+  text-align: left;
+  margin-left: 2rem;
+  color: rgb(87, 86, 86);
+  padding-top: 1rem;
+}
+.upDltFiles #fileSearch {
+  margin-left: 5rem;
+  margin-top: 2rem;
+  max-width: 50%;
+}
+.upDltFiles button[type="submit"] {
+  max-width: 50px;
+  padding: 5px;
+  background-color: aliceblue;
+  border: 1px solid rgb(173, 173, 173);
+  border-radius: 5px;
+}
+.upDltFiles button[type="submit"]:hover {
+  color: rgb(255, 253, 253);
+  background-color: aqua;
+  border: 2px solid aqua;
+}
+.upDltFiles button i {
+  font-weight: 700;
+  font-size: 20px;
+  color: rgb(45, 185, 250);
+}
+.upDltFilesF {
+  position: relative;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 5rem;
+}
+.upDltFilesF label {
+  margin-top: 10px;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+.upDltFilesF select {
+  max-width: 25%;
+  background-color: rgb(255, 255, 255);
+}
+.upDltFilesF #fileUpdate,
+#fileDelete {
+  border: 2px solid rgb(112, 111, 111);
+  border-radius: 10px;
+  max-width: 200px;
+  margin: 2rem 1rem;
+  padding: 1rem;
+  font-weight: 700;
+  background-color: white;
+  color: rgb(112, 111, 111);
+}
+#fileUpdate:hover,
+#fileDelete:hover {
+  color: rgb(255, 255, 255);
+  background-color: aqua;
+  border: 2px solid aqua;
+}
+@media (max-width: 400px) {
+  html {
+    font-size: 50%;
+  }
+  .upDltFiles {
+    left: 5rem;
+    max-width: calc(100% - 5rem);
+    z-index: 100;
+    margin: 2rem 0;
+  }
+  .sidebar.close ~ .upDltFiles {
+    left: 0;
+    max-width: 100%;
+  }
+  .upDltFilesF {
+    margin: 1rem;
+  }
+  .upDltFilesF select {
+    max-width: 50%;
+  }
+}

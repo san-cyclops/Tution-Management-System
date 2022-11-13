@@ -1,0 +1,73 @@
+.addPayment {
+  position: relative;
+  top: 4rem;
+  max-width: calc(100% - 18rem);
+  max-height: 100%;
+  left: 18rem;
+  transition: all 0.5s ease;
+  /* background-color: rgba(199, 199, 199, 0.685); */
+}
+.sidebar.close ~ .addPayment {
+  left: 5rem;
+  max-width: calc(100% - 6rem);
+}
+.addPayment h1 {
+  font-weight: 600;
+  font-size: 3rem;
+  text-align: left;
+  margin-left: 2rem;
+  color: rgb(87, 86, 86);
+  padding-top: 1rem;
+}
+.addPaymentF {
+  position: relative;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 5rem;
+}
+.addPaymentF label {
+  margin-top: 10px;
+  font-weight: 300;
+  font-size: 1.5rem;
+}
+.addPaymentF select {
+  max-width: 25%;
+  background-color: rgb(255, 255, 255);
+}
+.addPaymentF .addpaymentbtn {
+  border: 2px solid rgb(112, 111, 111);
+  border-radius: 10px;
+  max-width: 200px;
+  margin: 2rem 0;
+  padding: 1rem;
+  font-weight: 700;
+  background-color: white;
+  color: rgb(112, 111, 111);
+}
+.addpaymentbtn :hover {
+  color: rgb(255, 255, 255);
+  background-color: aqua;
+  border: 2px solid aqua;
+}
+@media (max-width: 600px) {
+  html {
+    font-size: 50%;
+  }
+  .addPayment {
+    left: 5rem;
+    max-width: calc(100% - 5rem);
+    z-index: 100;
+    margin: 2rem 0;
+  }
+  .sidebar.close ~ .addPayment {
+    left: 0;
+    max-width: 100%;
+  }
+  .addPaymentF {
+    margin: 2rem;
+  }
+  .addPaymentF select {
+    max-width: 50%;
+  }
+}

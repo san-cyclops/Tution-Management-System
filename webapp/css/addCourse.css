@@ -1,0 +1,98 @@
+.addCourse {
+  position: relative;
+  top: 4rem;
+  max-width: calc(100% - 18rem);
+  max-height: 100%;
+  left: 18rem;
+  transition: all 0.5s ease;
+  background-color: rgba(255, 255, 255, 0.685);
+}
+.sidebar.close ~ .addCourse {
+  left: 5rem;
+  max-width: calc(100% - 6rem);
+}
+.addCourse h1 {
+  font-weight: 600;
+  font-size: 3rem;
+  text-align: left;
+  margin-left: 2rem;
+  color: rgb(87, 86, 86);
+  padding-top: 1rem;
+}
+.addCourseF {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  margin: 2rem 5rem;
+}
+#notiSearch {
+  margin-left: 5rem;
+  margin-top: 2rem;
+  max-width: 50%;
+}
+button[type="submit"] {
+  max-width: 50px;
+  padding: 5px 20px;
+  background-color: aliceblue;
+  border: 1px solid rgb(173, 173, 173);
+  border-radius: 5px;
+}
+button[type="submit"]:hover {
+  color: rgb(255, 253, 253);
+  background-color: aqua;
+  border: 2px solid aqua;
+}
+.upDltFiles button i {
+  font-weight: 700;
+  font-size: 20px;
+  color: rgb(45, 185, 250);
+}
+.addCourseF label {
+  margin-top: 10px;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+.addCourseF select,
+input[type="time"] {
+  max-width: 50%;
+  background-color: rgb(255, 255, 255);
+}
+.addCourseF #addCrse {
+  border: 2px solid rgb(112, 111, 111);
+  border-radius: 10px;
+  max-width: 200px;
+  word-wrap: wrap;
+  margin: 2rem 0;
+  padding: 1rem;
+  font-weight: 700;
+  background-color: white;
+  color: rgb(112, 111, 111);
+}
+#addCrse:hover {
+  color: rgb(255, 255, 255);
+  background-color: aqua;
+  border: 2px solid aqua;
+}
+@media (max-width: 600px) {
+  html {
+    font-size: 50%;
+  }
+  .addCourse {
+    left: 5rem;
+    max-width: calc(100% - 5rem);
+    z-index: 100;
+    margin: 2rem 0;
+  }
+  .sidebar.close ~ .addCourse {
+    left: 0;
+    max-width: 100%;
+  }
+  .addCourseF {
+    margin: 1rem;
+  }
+  .addCourseF select,
+  input[type="time"] {
+    max-width: 100%;
+  }
+}

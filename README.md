@@ -2,7 +2,4 @@
 Tution Management System
 
 
-test
-khsdhygydfgdayfc
-grgrtgggdef
-bdjhdhkjd
+Mysql PWD = abc@123

@@ -71,3 +71,18 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+CREATE TABLE `tblstudents` (
+  `ID` int(10) NOT NULL,
+  `RFIDNumber` varchar(200) DEFAULT NULL,
+  `StudentID` varchar(200) DEFAULT NULL,
+  `StudentName` varchar(200) DEFAULT NULL,
+  `NIC` varchar(200) DEFAULT NULL,
+  `Address` mediumtext DEFAULT NULL,
+  `Birthday` date DEFAULT NULL,
+  `ContactNumber` varchar(200) DEFAULT NULL,
+  `EmailAddress` varchar(200) DEFAULT NULL,
+  `Password` varchar(200) DEFAULT NULL,
+  `CreationDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

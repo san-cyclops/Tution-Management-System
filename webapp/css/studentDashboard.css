@@ -1,0 +1,172 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&family=Poppins:wght@100;300;400;500&display=swap");
+
+body {
+  font-family: "Lato", sans-serif;
+}
+.dashboard {
+  position: relative;
+  top: 4rem;
+  height: 100%;
+  max-width: calc(100% - 18rem);
+  left: 18rem;
+  transition: all 0.5s ease;
+}
+.sidebar.close ~ .dashboard {
+  left: 5rem;
+  max-width: calc(100% - 5rem);
+}
+.userprofile {
+  max-width: 100%;
+  height: auto;
+  position: relative;
+  display: flex;
+}
+.userprofile::after{
+  content: "";
+  clear: both;
+  display: table;
+}
+.userprofile .userDetails {
+  position: relative;
+  top: 4rem;
+  width: 200px;
+  height: 200px;
+  padding: 3rem;
+  margin: 0 3rem;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 10px 10px 10px rgba(70, 71, 71, 0.15);
+  border: 1px solid rgba(151, 150, 150, 0.342);
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+.userprofile .userDetails img {
+  border-radius: 50%;
+  margin-bottom: 1.5rem;
+}
+.userprofile .dashbrdCorse {
+  position: relative;
+  top: 4rem;
+  max-width: 100%;
+  /* margin: 2rem; */
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  border: 1px solid rgba(151, 150, 150, 0.342);
+  padding: 10px;
+  font-weight: 700;
+  font-size: 2rem;
+  color: rgba(5, 5, 5, 0.568);
+}
+.userprofile .dashbrdCorse .dashCourseLink {
+  border: 1px solid rgba(214, 213, 213, 0.596);
+  display: flex;
+  flex-wrap: wrap;
+  margin: 5px;
+}
+.userprofile .dashbrdCorse .dashCourseLink img {
+  max-width: 200px;
+}
+.userprofile .dashbrdCorse .dashCourseLink a {
+  font-weight: 700;
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: black;
+  padding: 10px;
+}
+.userprofile .dashbrdCorse .dashCourseLink a:hover {
+  text-decoration: underline;
+  color: rgb(19, 206, 150);
+}
+.notifocation {
+  position: relative;
+  margin: 10rem 2rem;
+}
+.notifocation .headerN {
+  font-weight: 700;
+  font-size: 3rem;
+  color: rgba(5, 5, 5, 0.568);
+  margin-bottom: 2rem;
+}
+
+.notifocation .noti {
+  margin: 1.5rem;
+  line-height: 2;
+  font-weight: 300;
+  font-size: 1.5rem;
+  color: rgb(36, 32, 32);
+}
+
+@media (max-width: 600px) {
+  .dashboard {
+    left: 5rem;
+    max-width: calc(100% - 5rem);
+    z-index: 100;
+  }
+  .sidebar.close ~ .dashboard {
+    left: 0;
+    max-width: 100%;
+  }
+  .userprofile {
+    height: auto;
+    position: relative;
+    display: flex;
+    flex-flow: column;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+  }
+  .userprofile .userDetails {
+    margin: 2rem;
+  }
+  .userprofile .dashbrdCorse {
+    max-width: 100%;
+    margin: 2rem;
+    flex-wrap: wrap;
+    padding: 5px;
+    font-weight: 400;
+    font-size: 1rem;
+    color: rgba(5, 5, 5, 0.568);
+  }
+}
+/* @media (max-width: 400px) {
+  html {
+    font-size: 50%;
+  }
+
+  .dashboard {
+    left: 6rem;
+    width: calc(100% - 5rem);
+    z-index: 100;
+    margin: 0%;
+  }
+  .sidebar.close ~ .dashboard {
+    left: 0;
+    width: 100%;
+  }
+  .userprofile {
+    max-width: 100%;
+    height: auto;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+  .userprofile .dashbrdCorse {
+    max-width: 100%;
+    margin: 2rem;
+    padding: 5px;
+    font-weight: 400;
+    font-size: 1rem;
+    color: rgba(5, 5, 5, 0.568);
+  }
+  .userprofile .dashbrdCorse .dashCourseLink {
+    border: 1px solid rgba(214, 213, 213, 0.596);
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+  }
+} */

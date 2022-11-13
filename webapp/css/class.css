@@ -1,0 +1,90 @@
+.createClass {
+  position: relative;
+  top: 4rem;
+  height: 100%;
+  max-width: calc(100% - 18rem);
+  left: 18rem;
+  transition: all 0.5s ease;
+  margin: 2rem 1rem;
+  /* background-color: rgba(199, 199, 199, 0.685); */
+}
+
+.sidebar.close ~ .createClass {
+  left: 5rem;
+  max-width: calc(100% - 6rem);
+}
+
+.createClass h1 {
+  font-weight: 600;
+  font-size: 3rem;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.createClassF {
+  position: relative;
+  display: flex;
+  max-width: 100%;
+  flex-direction: column;
+  margin: 2rem 4rem;
+}
+
+.createClassF label {
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-top: 1rem;
+  }
+  .createClassF input[type="text"],
+  input[type="datetime-local"] {
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-top: 2px;
+    max-width: 100%;
+  }
+  .createClassF select{
+    max-width: 50%;
+  }
+    .createClassF input[type="submit"] {
+    padding: 1rem;
+    margin: 2rem 0;
+    max-width: 200px;
+    border: 2px solid black;
+    border-radius: 5px;
+    margin-right: 5rem;
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+  .createClassF input[type="submit"]:hover{
+    color: aliceblue;
+    background-color: black;
+  }
+
+@media (max-width: 600px) {
+  html {
+    font-size: 50%;
+  }
+
+  .createClass {
+    left: 5rem;
+    max-width: calc(100% - 5rem);
+    z-index: 100;
+    margin: 2rem 0;
+  }
+
+  .sidebar.close ~ .createClass {
+    left: 0;
+    max-width: 100%;
+  }
+
+  .createClassF {
+    margin: 2rem;
+  }
+
+  createClassF input[type="text"],
+    input[type="datetime-local"] {
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-top: 2px;
+    max-width: 75%;
+  }
+}

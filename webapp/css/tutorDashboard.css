@@ -1,0 +1,116 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&family=Poppins:wght@100;300;400;500&display=swap");
+
+body {
+  font-family: "Lato", sans-serif;
+}
+.tutordashboard {
+  position: relative;
+  top: 4rem;
+  height: 100%;
+  max-width: calc(100% - 18rem);
+  left: 18rem;
+  transition: all 0.5s ease;
+}
+.sidebar.close ~ .tutordashboard {
+  left: 5rem;
+  max-width: calc(100% - 5rem);
+}
+.tutorprofile {
+  max-width: 100%;
+  height: auto;
+  position: relative;
+  display: flex;
+}
+.tutorprofile::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.tutorprofile .tutorDetails {
+  position: relative;
+  top: 4rem;
+  width: 200px;
+  height: 200px;
+  padding: 3rem;
+  margin: 0 3rem;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 10px 10px 10px rgba(70, 71, 71, 0.15);
+  border: 1px solid rgba(134, 133, 133, 0.342);
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+.tutorprofile .tutorDetails img {
+  border-radius: 50%;
+  margin-bottom: 1.5rem;
+}
+.tutorprofile .tutorCourse {
+  position: relative;
+  top: 4rem;
+  max-width: 100%;
+  /* margin: 2rem; */
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  border: 1px solid rgba(151, 150, 150, 0.342);
+  padding: 10px;
+  font-weight: 700;
+  font-size: 2rem;
+  color: rgba(5, 5, 5, 0.568);
+}
+.tutorprofile .tutorCourse .dashCourseLink {
+  border: 1px solid rgba(214, 213, 213, 0.596);
+  display: flex;
+  flex-wrap: wrap;
+  margin: 5px;
+}
+.tutorprofile .tutorCourse .dashCourseLink img {
+  max-width: 200px;
+}
+.tutorprofile .tutorCourse .dashCourseLink a {
+  font-weight: 700;
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: black;
+  padding: 10px;
+}
+.tutorprofile .tutorCourse .dashCourseLink a:hover {
+  text-decoration: underline;
+  color: rgb(19, 206, 150);
+}
+
+@media (max-width: 600px) {
+  .tutordashboard {
+    left: 5rem;
+    max-width: calc(100% - 5rem);
+    z-index: 100;
+  }
+  .sidebar.close ~ .tutordashboard {
+    left: 0;
+    max-width: 100%;
+  }
+  .tutorprofile {
+    height: auto;
+    position: relative;
+    display: flex;
+    flex-flow: column;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+  }
+  .tutorprofile .tutorDetails {
+    margin: 2rem;
+  }
+  .tutorprofile .tutorCourse {
+    max-width: 100%;
+    margin: 2rem;
+    flex-wrap: wrap;
+    padding: 5px;
+    font-weight: 400;
+    font-size: 1rem;
+    color: rgba(5, 5, 5, 0.568);
+  }
+}
