@@ -406,7 +406,7 @@ if (isset($_GET['delid'])) {
                     <td><?php echo $row['LectureId']; ?></td>
                     <td><?php echo $row['cDay']; ?></td>
                     <td> <?php echo $row['ctimeE']; ?></td>
-                    <td> <img style="width: 25px;background-size:100% 100%;" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['coursePic']); ?>" name="coursePic"/></td>
+                    <td> <img style="width: 80px;background-size:100% 100%;" src="media/<?php echo $row['coursePic'] ?>" name="Pic" /></td>
                     <td>
                       <a href="course_edit.php?editid=<?php echo htmlentities($row['ID']); ?>" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
                       <a href="course_view.php?delid=<?php echo ($row['ID']); ?>" class="delete" title="Delete" data-toggle="tooltip" onclick="return confirm('Do you really want to Delete ?');"><i class="material-icons">&#xE872;</i></a>

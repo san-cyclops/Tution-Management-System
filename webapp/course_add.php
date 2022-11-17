@@ -12,7 +12,7 @@ if (isset($_POST['submit'])) {
   $cDay = $_POST['cDay'];
   $ctimeS = $_POST['ctimeS'];
   $ctimeE = $_POST['ctimeE'];
-  $imgData = file_get_contents($_FILES['coursePic']['tmp_name']);
+  $imgData = $_FILES['coursePic']['name'];
 
   // Query for data insertion
   $sql = "INSERT INTO tblcourse(courseId,courseName,LectureId,cDay,ctimeS,ctimeE,coursePic) VALUES(?,?,?,?,?,?,?)";
@@ -23,6 +23,7 @@ if (isset($_POST['submit'])) {
 
 
   if ($current_id) {
+    move_uploaded_file($_FILES["coursePic"]["tmp_name"],"media/".$_FILES["coursePic"]["name"]);
     echo "<script>alert('You have successfully inserted the data');</script>";
     echo "<script type='text/javascript'> document.location ='course_view.php'; </script>";
   } else {
@@ -236,7 +237,7 @@ if (isset($_POST['submit'])) {
       <input type="time" id="ctimeE" name="ctimeE">
       <br>
       <label for="coursePic">Course Feature Picture:</label>
-      <input type="file" id="coursePic" name="coursePic"><br>
+      <input type="file" id="coursePic" name="coursePic" required><br>
       <br>
        <input type="submit" id="addCrse" value="Add Course" name="submit">
     </form>

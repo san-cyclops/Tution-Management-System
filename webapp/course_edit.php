@@ -10,22 +10,29 @@ if (isset($_POST['submit'])) {
   $cDay = $_POST['cDay'];
   $ctimeS = $_POST['ctimeS'];
   $ctimeE = $_POST['ctimeE'];
-  $imgData = $_FILES['coursePic']['tmp_name'];
+  $imgData = $_FILES['coursePic']['name'];
 
   move_uploaded_file($_FILES["coursePic"]["tmp_name"],"media/".$_FILES["coursePic"]["name"]);
 
-  //Query for data updation
-  //$query = mysqli_query($con, "update  tblcourse set courseId='$courseId', courseName='$courseName', LectureId='$LectureId', cDay='$cDay', ctimeS='$ctimeS', ctimeE='$ctimeE', coursePic='$imgData' where ID='$eid'");
-
-  $sql="update tblcourse set courseId= :cId, courseName='$courseName', LectureId='$LectureId', cDay='$cDay', ctimeS='$ctimeS', ctimeE='$ctimeE' coursePic=:aimage where ID='$eid'";
-  $query = $con->prepare($sql);
-  $query->bind_param(':aimage',$imgData,PDO::PARAM_STR);
+ 
+  $sql="update tblcourse set courseId= :cId, courseName= :courseName, 
+  LectureId= :LectureId, cDay= :cDay, ctimeS= :ctimeS, ctimeE= :ctimeE, 
+  coursePic=:aimage where ID= :eid";
+  $query = $dbh->prepare($sql);  
+	$query->bindParam(':cId', $courseId,PDO::PARAM_STR);
+  $query->bindParam(':courseName', $courseName,PDO::PARAM_STR);
+  $query->bindParam(':LectureId', $LectureId,PDO::PARAM_STR);
+  $query->bindParam(':cDay', $cDay,PDO::PARAM_STR);
+  $query->bindParam(':ctimeS', $ctimeS,PDO::PARAM_STR);
+  $query->bindParam(':ctimeE', $ctimeE,PDO::PARAM_STR);
+  $query->bindParam(':aimage', $imgData,PDO::PARAM_STR,PDO::PARAM_STR);
+  $query->bindParam(':eid', $eid,PDO::PARAM_STR,PDO::PARAM_STR);
   $query->execute();
-  if( $query->execute()){
-    echo '<script>alert(" image has been Updated.")</script>';
-
-  }else{
-    echo '<<script>alert("Something went wrong please try again.")</script>';
+  if ($query->execute()) {
+    echo "<script>alert('You have successfully Updated the data');</script>";
+    echo "<script type='text/javascript'> document.location ='course_view.php'; </script>";
+  } else {
+    echo "<script>alert('Something Went Wrong. Please try again');</script>";
   }
 }
 ?>
@@ -243,9 +250,8 @@ if (isset($_POST['submit'])) {
         <input type="time" id="ctimeE" name="ctimeE" value="<?php echo $row['ctimeE']; ?>">
         <br>
         <label for="coursePic">Course Feature Picture:</label>
-        <input type="file" id="coursePic" name="coursePic">
-        <img style="width: 25px;background-size:100% 100%;" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['coursePic']); ?>" name="coursePicview" />
-
+        <input type="file" id="coursePic" name="coursePic" required>
+        <img style="width: 100px;background-size:100% 100%;" src="media/<?php echo $row['coursePic'] ?>" name="Pic" />
       <?php } ?>
 
       <br>
