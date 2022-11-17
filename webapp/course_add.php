@@ -1,3 +1,36 @@
+<?php
+//Databse Connection file
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+include('dbconnection.php');
+if (isset($_POST['submit'])) {
+  //getting the post values
+  $courseId = $_POST['courseId'];
+  $courseName = $_POST['courseName'];
+  $LectureId = $_POST['LectureId'];
+  $cDay = $_POST['cDay'];
+  $ctimeS = $_POST['ctimeS'];
+  $ctimeE = $_POST['ctimeE'];
+  $imgData = file_get_contents($_FILES['coursePic']['tmp_name']);
+
+  // Query for data insertion
+  $sql = "INSERT INTO tblcourse(courseId,courseName,LectureId,cDay,ctimeS,ctimeE,coursePic) VALUES(?,?,?,?,?,?,?)";
+  $statement = $con->prepare($sql);
+  $statement->bind_param('sssssss', $courseId,$courseName,$LectureId,$cDay,$ctimeS,$ctimeE,$imgData);
+
+  $current_id = $statement->execute() or die("<b>Error:</b> Problem on Image Insert<br/>" . mysqli_connect_error());
+
+
+  if ($current_id) {
+    echo "<script>alert('You have successfully inserted the data');</script>";
+    echo "<script type='text/javascript'> document.location ='course_view.php'; </script>";
+  } else {
+    echo "<script>alert('Something Went Wrong. Please try again');</script>";
+  }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -172,7 +205,7 @@
 
   <section class="addCourse">
     <h1 class="headerAS">Add Course</h1>
-    <form action="" method="post" name="addCourseF" class="addCourseF">
+    <form action="" method="post" enctype="multipart/form-data" name="addCourseF" class="addCourseF">
       <label for="courseId">Course ID:</label>
       <input type="text" id="courseId" name="courseId"><br>
       <label for="courseName">Course Name:</label>
@@ -205,7 +238,7 @@
       <label for="coursePic">Course Feature Picture:</label>
       <input type="file" id="coursePic" name="coursePic"><br>
       <br>
-      <button name="addCrse" id="addCrse">Add Course</button>
+       <input type="submit" id="addCrse" value="Add Course" name="submit">
     </form>
 
   </section>

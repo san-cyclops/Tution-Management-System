@@ -387,6 +387,7 @@ if (isset($_GET['delid'])) {
                 <th>NIC</th>
                 <th>Address</th>
                 <th>ContactNumber</th>
+                <th>ProfilePicture</th>
               </tr>
             </thead>
             <tbody>
@@ -407,6 +408,7 @@ if (isset($_GET['delid'])) {
                     <td><?php echo $row['NIC']; ?></td>
                     <td> <?php echo $row['Address']; ?></td>
                     <td> <?php echo $row['ContactNumber']; ?></td>
+                    <td> <img style="width: 25px;background-size:100% 100%;" src="media/<?php  echo $row['ProfilePicture'];?>" name="ProfilePic"/></td>
                     <td>
                       <a href="student_edit.php?editid=<?php echo htmlentities($row['ID']); ?>" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
                       <a href="student_view.php?delid=<?php echo ($row['ID']); ?>" class="delete" title="Delete" data-toggle="tooltip" onclick="return confirm('Do you really want to Delete ?');"><i class="material-icons">&#xE872;</i></a>
