@@ -1,48 +1,3 @@
-<?php
-//Databse Connection file
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-include('dbconnection.php');
-if (isset($_POST['submit'])) {
-  //getting the post values
-  $RFIDNumber = $_POST['RFIDNumber'];
-  $StudentID = $_POST['StudentID'];
-  $StudentName = $_POST['StudentName'];
-  $NIC = $_POST['NIC'];
-  $Address = $_POST['Address'];
-  $Gender = "test";  //$_POST['Gender'];
-  $Birthday = $_POST['Birthday'];
-  $ContactNumber = $_POST['ContactNumber'];
-  $EmailAddress = $_POST['EmailAddress'];
-  $Password = $_POST['Password'];
-  $imgData = file_get_contents($_FILES['ProfilePicture']['tmp_name']);
-  $ParentName = $_POST['ParentName'];
-  $ParentContactNumber = $_POST['ParentContactNumber'];
-  $ParentEmailAddress = $_POST['ParentEmailAddress'];
-  //$CreationDate = $_POST['CreationDate'];
-
-  // Query for data insertion
-  $sql = "INSERT INTO tblstudents(RFIDNumber,StudentID,StudentName,NIC,Address,Gender,Birthday,ContactNumber,EmailAddress,Password,ProfilePicture,ParentName,ParentContactNumber,ParentEmailAddress) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-  $statement = $con->prepare($sql);
-  $statement->bind_param('ssssssssssssss', $RFIDNumber,$StudentID,$StudentName,$NIC,$Address,$Gender,$Birthday,$ContactNumber,$EmailAddress,$Password,$imgData,$ParentName,$ParentContactNumber,$ParentEmailAddress);
-
-  //$sql = "INSERT INTO tblstudents(RFIDNumber, StudentID,ProfilePicture) value(?,?,?)";
-  //$statement = $con->prepare($sql);
-  //$statement->bind_param('sss', $RFIDNumber,$StudentID,$imgData);
-
-  $current_id = $statement->execute() or die("<b>Error:</b> Problem on Image Insert<br/>" . mysqli_connect_error());
-
-
-  if ($current_id) {
-    echo "<script>alert('You have successfully inserted the data');</script>";
-    echo "<script type='text/javascript'> document.location ='student_view.php'; </script>";
-  } else {
-    echo "<script>alert('Something Went Wrong. Please try again');</script>";
-  }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,12 +7,12 @@ if (isset($_POST['submit'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- css style sheet -->
   <link rel="stylesheet" href="css/pUser.css" />
-  <link rel="stylesheet" href="css/sReg.css" />
+  <link rel="stylesheet" href="css/addCourse.css">
   <!-- font awesome file link -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" />
   <!-- Boxicons CSS -->
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-  <title>Admin Portal</title>
+  <title>Add Course</title>
 </head>
 
 <body>
@@ -213,75 +168,55 @@ if (isset($_POST['submit'])) {
       </div>
     </nav>
   </header>
-  <!-- Student Registration form section starts -->
-  <section class="student-reg">
-    <h1>Student Registration</h1>
+  <!-- Add Course section starts -->
 
-    <form action="" method="post" enctype="multipart/form-data" name="studentReg" class="student-regF">
-
-      <fieldset>
-        <legend>Student Details</legend>
-        <label for="rfid">RFID Number:</label>
-        <input type="text" id="rfid" name="RFIDNumber"><br>
-        <label for="sID">Student ID:</label>
-        <input type="text" id="sID" name="StudentID"><br>
-        <label for="studentName">Student Name:</label>
-        <input type="text" id="sName" name="StudentName"><br>
-        <label for="nic">NIC:</label>
-        <input type="text" id="nic" name="NIC"><br>
-        <label for="address">Address:</label>
-        <input type="text" id="Address" name="Address"><br>
-        <label for="birthday">Birthday:</label>
-        <input type="date" id="birthday" name="Birthday"><br>
-        <div class="gender"><label for="gender">Gender:</label><br>
-          <input type="radio" id="male" name="Gender" value="male">
-          <label for="male">Male</label>
-          <input type="radio" id="female" name="Gender" value="female">
-          <label for="female">Female</label>
-        </div>
-        <label for="phone">Contact Number:</label>
-        <input type="tel" id="phone" name="ContactNumber" required><br>
-        <label for="email">Email Address:</label>
-        <input type="email" id="email" name="EmailAddress"><br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="Password" required><br>
-        <label for="pPic">Profile Picture:</label>
-        <input type="file" id="pPic" name="ProfilePicture" accept=".png,.gif,.jpg" required>
-        <br><br><br><br>
-      </fieldset>
-      <fieldset>
-        <legend>Parent Details</legend>
-        <label for="parentName">Parent Name:</label>
-        <input type="text" id="pName" name="ParentName"><br>
-        <label for="pPhone">Parent Contact Number:</label>
-        <input type="tel" id="pPhone" name="ParentContactNumber" required><br>
-        <label for="email">Parent Email Address:</label>
-        <input type="email" id="email" name="ParentEmailAddress"><br>
-
-
-      </fieldset>
-
-
-      <br><br><br>
-      <input type="submit" value="Submit" name="submit">
+  <section class="addCourse">
+    <h1 class="headerAS">Add Course</h1>
+    <form action="" method="post" name="addCourseF" class="addCourseF">
+      <label for="courseId">Course ID:</label>
+      <input type="text" id="courseId" name="courseId"><br>
+      <label for="courseName">Course Name:</label>
+      <input type="text" id="courseName" name="courseName"><br>
+      <label for="LectureId">Lecture ID:</label>
+      <select id="LectureId" name="LectureId">
+        <option value="lect0001">Lect0001</option>
+        <option value="Tuesday">Tuesday</option>
+        <option value="Wednesday">Wednesday</option>
+        <option value="Thursday">Thursday</option>
+        <option value="Friday">Friday</option>
+        <option value="Saturday">Saturday</option>
+        <option value="Sunday">Sunday</option>
+      </select><br>
+      <label for="cDay">Day:</label>
+      <select id="cDay" name="cDay">
+        <option value="Monday">Monday</option>
+        <option value="Tuesday">Tuesday</option>
+        <option value="Wednesday">Wednesday</option>
+        <option value="Thursday">Thursday</option>
+        <option value="Friday">Friday</option>
+        <option value="Saturday">Saturday</option>
+        <option value="Sunday">Sunday</option>
+      </select><br>
+      <label for="ctimeS">Time:</label>
+      <input type="time" id="ctimeS" name="ctimeS">
+      <label for="ctimeS">To</label>
+      <input type="time" id="ctimeE" name="ctimeE">
+      <br>
+      <label for="coursePic">Course Feature Picture:</label>
+      <input type="file" id="coursePic" name="coursePic"><br>
+      <br>
+      <button name="addCrse" id="addCrse">Add Course</button>
     </form>
 
-
-
   </section>
+  <!-- video tutorials section ends -->
 
 
 
 
-
-
-
-
-
-
-  <!-- student Registration form section ends -->
   <!-- custom js file -->
   <script src="js/userP.js"></script>
+
 
 </body>
 

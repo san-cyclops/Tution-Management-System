@@ -9,7 +9,10 @@ if (isset($_POST['submit'])) {
   $StudentName = $_POST['StudentName'];
   $NIC = $_POST['NIC'];
   $Address = $_POST['Address'];
-  $Gender = $_POST['Gender'];
+  if (empty($_POST['Gender'])){
+    $Gender = "Male";
+  }  
+  
   $Birthday = $_POST['Birthday'];
   $ContactNumber = $_POST['ContactNumber'];
   $EmailAddress = $_POST['EmailAddress'];
@@ -242,7 +245,8 @@ if (isset($_POST['submit'])) {
             <label for="password">Password:</label>
             <input type="password" value="<?php echo $row['Password']; ?>" id="password" name="Password" required><br>
             <label for="pPic">Profile Picture:</label>
-            <input type="file" id="pPic" value="<?php echo $row['ProfilePicture']; ?>" name="ProfilePicture">
+            <input type="file" id="pPic" name="ProfilePicture" accept=".png,.gif,.jpg" required>
+            <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['ProfilePicture']); ?>" name="ProfilePicture"/>
             <br><br><br><br>
           </fieldset>
           <fieldset>
