@@ -1,47 +1,36 @@
 <?php
-//Databse Connection file
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
+//Database Connection
 include('dbconnection.php');
 if (isset($_POST['submit'])) {
-  //getting the post values
+  $eid = $_GET['editid'];
+  //Getting Post Values
   $RFIDNumber = $_POST['RFIDNumber'];
   $StudentID = $_POST['StudentID'];
   $StudentName = $_POST['StudentName'];
   $NIC = $_POST['NIC'];
   $Address = $_POST['Address'];
-  $Gender = "test";  //$_POST['Gender'];
+  $Gender = $_POST['Gender'];
   $Birthday = $_POST['Birthday'];
   $ContactNumber = $_POST['ContactNumber'];
   $EmailAddress = $_POST['EmailAddress'];
   $Password = $_POST['Password'];
-  $imgData = file_get_contents($_FILES['ProfilePicture']['tmp_name']);
+  $ProfilePicture = $_POST['ProfilePicture'];
   $ParentName = $_POST['ParentName'];
   $ParentContactNumber = $_POST['ParentContactNumber'];
   $ParentEmailAddress = $_POST['ParentEmailAddress'];
-  //$CreationDate = $_POST['CreationDate'];
 
-  // Query for data insertion
-  $sql = "INSERT INTO tblstudents(tb_RFIDNumber,tb_StudentID,tb_StudentName,tb_NIC,tb_Address,tb_Gender,tb_Birthday,tb_ContactNumber,tb_EmailAddress,tb_Password,ProfilePicture,tb_ParentName,tb_ParentContactNumber,tb_ParentEmailAddress) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-  $statement = $con->prepare($sql);
-  $statement->bind_param('ssssssssssssss', $RFIDNumber,$StudentID,$StudentName,$NIC,$Address,$Gender,$Birthday,$ContactNumber,$EmailAddress,$Password,$imgData,$ParentName,$ParentContactNumber,$ParentEmailAddress);
+  //Query for data updation
+  $query = mysqli_query($con, "update  tblstudents set StudentID='$StudentID', StudentName='$StudentName', NIC='$NIC', Address='$Address', Gender='$Gender', Birthday='$Birthday', ContactNumber='$ContactNumber', EmailAddress='$EmailAddress', Password='$Password', ProfilePicture='$ProfilePicture', ParentName='$ParentName', ParentContactNumber='$ParentContactNumber', ParentEmailAddress='$ParentEmailAddress'  where ID='$eid'");
 
-  //$sql = "INSERT INTO tblstudents(RFIDNumber, StudentID,ProfilePicture) value(?,?,?)";
-  //$statement = $con->prepare($sql);
-  //$statement->bind_param('sss', $RFIDNumber,$StudentID,$imgData);
-
-  $current_id = $statement->execute() or die("<b>Error:</b> Problem on Image Insert<br/>" . mysqli_connect_error());
-
-
-  if ($current_id) {
-    echo "<script>alert('You have successfully inserted the data');</script>";
+  if ($query) {
+    echo "<script>alert('You have successfully update the data');</script>";
     echo "<script type='text/javascript'> document.location ='student_view.php'; </script>";
   } else {
     echo "<script>alert('Something Went Wrong. Please try again');</script>";
   }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -217,54 +206,61 @@ if (isset($_POST['submit'])) {
   <section class="student-reg">
     <h1>Student Registration</h1>
 
-    <form action="" method="post" enctype="multipart/form-data" name="studentReg" class="student-regF">
+    <form action="" method="post" name="studentReg" class="student-regF">
 
-      <fieldset>
-        <legend>Student Details</legend>
-        <label for="rfid">RFID Number:</label>
-        <input type="text" id="rfid" name="RFIDNumber"><br>
-        <label for="sID">Student ID:</label>
-        <input type="text" id="sID" name="StudentID"><br>
-        <label for="studentName">Student Name:</label>
-        <input type="text" id="sName" name="StudentName"><br>
-        <label for="nic">NIC:</label>
-        <input type="text" id="nic" name="NIC"><br>
-        <label for="address">Address:</label>
-        <input type="text" id="Address" name="Address"><br>
-        <label for="birthday">Birthday:</label>
-        <input type="date" id="birthday" name="Birthday"><br>
-        <div class="gender"><label for="gender">Gender:</label><br>
-          <input type="radio" id="male" name="Gender" value="male">
-          <label for="male">Male</label>
-          <input type="radio" id="female" name="Gender" value="female">
-          <label for="female">Female</label>
-        </div>
-        <label for="phone">Contact Number:</label>
-        <input type="tel" id="phone" name="ContactNumber" required><br>
-        <label for="email">Email Address:</label>
-        <input type="email" id="email" name="EmailAddress"><br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="Password" required><br>
-        <label for="pPic">Profile Picture:</label>
-        <input type="file" id="pPic" name="ProfilePicture" accept=".png,.gif,.jpg" required>
-        <br><br><br><br>
-      </fieldset>
-      <fieldset>
-        <legend>Parent Details</legend>
-        <label for="parentName">Parent Name:</label>
-        <input type="text" id="pName" name="ParentName"><br>
-        <label for="pPhone">Parent Contact Number:</label>
-        <input type="tel" id="pPhone" name="ParentContactNumber" required><br>
-        <label for="email">Parent Email Address:</label>
-        <input type="email" id="email" name="ParentEmailAddress"><br>
+      <form method="POST">
+        <?php
+        $eid = $_GET['editid'];
+        $ret = mysqli_query($con, "select * from tblstudents where ID='$eid'");
+        while ($row = mysqli_fetch_array($ret)) {
+        ?>
 
+          <fieldset>
+            <legend>Student Details</legend>
+            <label for="rfid">RFID Number:</label>
+            <input type="text" id="rfid" value="<?php echo $row['RFIDNumber']; ?>" name="RFIDNumber"><br>
+            <label for="sID">Student ID:</label>
+            <input type="text" value="<?php echo $row['StudentID']; ?>" id="sID" name="StudentID"><br>
+            <label for="studentName">Student Name:</label>
+            <input type="text" value="<?php echo $row['StudentName']; ?>" id="sName" name="StudentName"><br>
+            <label for="nic">NIC:</label>
+            <input type="text" value="<?php echo $row['NIC']; ?>" id="nic" name="NIC"><br>
+            <label for="address">Address:</label>
+            <input type="text" value="<?php echo $row['Address']; ?>" id="Address" name="Address"><br>
+            <label for="birthday">Birthday:</label>
+            <input type="date" id="birthday" value="<?php echo $row['Birthday']; ?>" name="Birthday"><br>
+            <div class="gender"><label for="gender">Gender:</label><br>
+              <input type="radio" id="male" name="Gender" value="male">
+              <label for="male">Male</label>
+              <input type="radio" id="female" name="Gender" value="female">
+              <label for="female">Female</label>
+            </div>
+            <label for="phone">Contact Number:</label>
+            <input type="tel" value="<?php echo $row['ContactNumber']; ?>" id="phone" name="ContactNumber" required><br>
+            <label for="email">Email Address:</label>
+            <input type="email" value="<?php echo $row['EmailAddress']; ?>" id="email" name="EmailAddress"><br>
+            <label for="password">Password:</label>
+            <input type="password" value="<?php echo $row['Password']; ?>" id="password" name="Password" required><br>
+            <label for="pPic">Profile Picture:</label>
+            <input type="file" id="pPic" value="<?php echo $row['ProfilePicture']; ?>" name="ProfilePicture">
+            <br><br><br><br>
+          </fieldset>
+          <fieldset>
+            <legend>Parent Details</legend>
+            <label for="parentName">Parent Name:</label>
+            <input type="text" value="<?php echo $row['ParentName']; ?>" id="pName" name="ParentName"><br>
+            <label for="pPhone">Parent Contact Number:</label>
+            <input type="tel" id="pPhone" value="<?php echo $row['ParentContactNumber']; ?>" name="ParentContactNumber" required><br>
+            <label for="email">Parent Email Address:</label>
+            <input type="email" id="email" value="<?php echo $row['ParentEmailAddress']; ?>" name="ParentEmailAddress"><br>
+          </fieldset>
 
-      </fieldset>
+        <?php
+        } ?>
 
-
-      <br><br><br>
-      <input type="submit" value="Submit" name="submit">
-    </form>
+        <br><br><br>
+        <input type="submit" value="Submit" name="submit">
+      </form>
 
 
 

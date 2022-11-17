@@ -3,10 +3,10 @@
 include('dbconnection.php');
 //Code for deletion
 if (isset($_GET['delid'])) {
-    $rid = intval($_GET['delid']);
-    $sql = mysqli_query($con, "delete from tblstudents where ID=$rid");
-    echo "<script>alert('Data deleted');</script>";
-    echo "<script>window.location.href = 'student_view.php'</script>";
+  $rid = intval($_GET['delid']);
+  $sql = mysqli_query($con, "delete from tblstudents where ID=$rid");
+  echo "<script>alert('Data deleted');</script>";
+  echo "<script>window.location.href = 'student_view.php'</script>";
 }
 ?>
 
@@ -185,9 +185,9 @@ if (isset($_GET['delid'])) {
 
 
   <section class="student-reg">
-    <h1>Student Registration</h1>
 
- 
+
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -369,7 +369,7 @@ if (isset($_GET['delid'])) {
           <div class="table-title">
             <div class="row">
               <div class="col-sm-5">
-                <h2>User <b>Management</b></h2>
+                <h2> Student <b> View </b></h2>
               </div>
               <div class="col-sm-7" align="right">
                 <a href="student_reg.php" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add New Student</span></a>
@@ -401,15 +401,15 @@ if (isset($_GET['delid'])) {
                   <!--Fetch the Records -->
                   <tr>
                     <td><?php echo $cnt; ?></td>
-                    <td><?php echo $row['RFIDNumber']; ?> <?php echo $row['StudentID']; ?></td>
-                    <td><?php echo $row['StudentName']; ?></td>
-                    <td><?php echo $row['NIC']; ?></td>
-                    <td> <?php echo $row['Address']; ?></td>
-                    <td> <?php echo $row['ContactNumber']; ?></td>
+                    <td><?php echo $row['tb_RFIDNumber']; ?> </td>
+                    <td><?php echo $row['tb_StudentID']; ?></td>
+                    <td><?php echo $row['tb_StudentName']; ?></td>
+                    <td><?php echo $row['tb_NIC']; ?></td>
+                    <td> <?php echo $row['tb_Address']; ?></td>
+                    <td> <?php echo $row['tb_ContactNumber']; ?></td>
                     <td>
-                      <a href="read.php?viewid=<?php echo htmlentities($row['ID']); ?>" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
-                      <a href="edit.php?editid=<?php echo htmlentities($row['ID']); ?>" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                      <a href="index.php?delid=<?php echo ($row['ID']); ?>" class="delete" title="Delete" data-toggle="tooltip" onclick="return confirm('Do you really want to Delete ?');"><i class="material-icons">&#xE872;</i></a>
+                      <a href="student_edit.php?editid=<?php echo htmlentities($row['ID']); ?>" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                      <a href="student_view.php?delid=<?php echo ($row['ID']); ?>" class="delete" title="Delete" data-toggle="tooltip" onclick="return confirm('Do you really want to Delete ?');"><i class="material-icons">&#xE872;</i></a>
                     </td>
                   </tr>
                 <?php
