@@ -1,3 +1,54 @@
+<?php
+//Database Connection
+include('dbconnection.php');
+if (isset($_POST['submit'])) {
+  $eid = $_GET['editid'];
+  //Getting Post Values
+  $tID = $_POST['tID'];
+  $tName = $_POST['tName'];
+  $address = $_POST['address'];
+  $birthday = $_POST['birthday'];
+  $gender = $_POST['gender'];
+  $phone = $_POST['phone'];
+  $email = $_POST['email'];
+  $password = $_POST['password'];
+  
+  $imgData = $_FILES['pPic']['name'];
+
+  move_uploaded_file($_FILES["pPic"]["tmp_name"],"media/".$_FILES["pPic"]["name"]);
+
+ 
+  $sql="update tbllectures set ID = :ID,
+  tID = :tID,
+  tName = :tName,
+  nic = :nic,
+  address = :address,
+  birthday = :birthday,
+  gender = :gender,
+  phone = :phone,
+  email = :email,
+  password = :password,
+  pPic = :imgData where ID= :eid";
+  $query = $dbh->prepare($sql);  
+	$query->bindParam(':tID', $tID,PDO::PARAM_STR);
+  $query->bindParam(':tName', $tName,PDO::PARAM_STR);
+  $query->bindParam(':nic', $nic,PDO::PARAM_STR);
+  $query->bindParam(':address', $address,PDO::PARAM_STR);
+  $query->bindParam(':gender', $gender,PDO::PARAM_STR);
+  $query->bindParam(':email', $email,PDO::PARAM_STR);
+  $query->bindParam(':password', $password,PDO::PARAM_STR);
+  $query->bindParam(':imgData', $imgData,PDO::PARAM_STR,PDO::PARAM_STR);
+  $query->bindParam(':eid', $eid,PDO::PARAM_STR,PDO::PARAM_STR);
+  $query->execute();
+  if ($query->execute()) {
+    echo "<script>alert('You have successfully Updated the data');</script>";
+    echo "<script type='text/javascript'> document.location ='lecture_view.php'; </script>";
+  } else {
+    echo "<script>alert('Something Went Wrong. Please try again');</script>";
+  }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
