@@ -18,7 +18,7 @@
 
             if ($count > 0) {
                 $_SESSION['uname'] = $uname;
-                header('Location: landingPage.php');
+                header('Location: admin_home.php');
             } else {
                 echo "Invalid username and password";
                 $required_msg = '<span id="modal_errors_1" class="error-message">
