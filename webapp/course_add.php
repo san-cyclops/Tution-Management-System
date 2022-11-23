@@ -3,6 +3,13 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+function getData(){
+  // function body  
+}
+
+$data = getData();
+
+
 include('dbconnection.php');
 if (isset($_POST['submit'])) {
   //getting the post values
