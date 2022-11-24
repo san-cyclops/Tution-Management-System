@@ -4,6 +4,29 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 include('dbconnection.php');
+
+$ret = mysqli_query($con, "select max(id) from tblstudents");
+$row = mysqli_fetch_row($ret);
+$val = (int)$row[0] + 1;
+$value = str_pad($val, 10, '0', STR_PAD_LEFT);
+echo $value;
+//return $value;
+
+$StudentID = $value;
+
+$n=10;
+function randomNumber($n) {
+ $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+ $randomString = '';
+ for ($i = 0; $i < $n; $i++) {
+  $index = rand(0, strlen($characters) - 1);
+  $randomString .= $characters[$index];
+ }
+ return strtoupper($randomString);
+}
+$RFIDNumber = randomNumber($n);
+
+
 if (isset($_POST['submit'])) {
   //getting the post values
   $RFIDNumber = $_POST['RFIDNumber'];
@@ -176,9 +199,9 @@ if (isset($_POST['submit'])) {
       <fieldset>
         <legend>Student Details</legend>
         <label for="rfid">RFID Number:</label>
-        <input type="text" id="rfid" name="RFIDNumber"><br>
+        <input type="text" id="rfid" name="RFIDNumber" value="<?php echo $RFIDNumber; ?>"><br>
         <label for="sID">Student ID:</label>
-        <input type="text" id="sID" name="StudentID"><br>
+        <input type="text" id="sID" name="StudentID" value="<?php echo $StudentID; ?>"><br>
         <label for="studentName">Student Name:</label>
         <input type="text" id="sName" name="StudentName"><br>
         <label for="nic">NIC:</label>

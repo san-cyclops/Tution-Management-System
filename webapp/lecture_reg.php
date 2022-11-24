@@ -4,6 +4,16 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 include('dbconnection.php');
+
+$ret = mysqli_query($con, "select max(id) from tbllectures");
+$row = mysqli_fetch_row($ret);
+$val = (int)$row[0] + 1;
+$value = str_pad($val, 10, '0', STR_PAD_LEFT);
+ 
+//return $value;
+
+$tID = $value;
+
 if (isset($_POST['submit'])) {
   //getting the post values
   $tID = $_POST['tID'];
@@ -165,7 +175,7 @@ if (isset($_POST['submit'])) {
     <form action="" method="post" enctype="multipart/form-data" name="tutorReg" class="tutor-regF">
 
       <label for="tID">Tutor ID:</label>
-      <input type="text" id="tID" name="tID"><br>
+      <input type="text" id="tID" name="tID" value="<?php echo $tID; ?>"><br>
       <label for="tutorName">Tutor Name:</label>
       <input type="text" id="tName" name="tName"><br>
       <label for="nic">NIC:</label>

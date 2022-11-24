@@ -3,14 +3,19 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-function getData(){
-  // function body  
-}
-
-$data = getData();
-
-
 include('dbconnection.php');
+
+
+$ret = mysqli_query($con, "select max(id) from tblcourse");
+$row = mysqli_fetch_row($ret);
+$val = (int)$row[0] + 1;
+$value = str_pad($val, 10, '0', STR_PAD_LEFT);
+echo $value;
+//return $value;
+
+$courseId = $value;
+
+
 if (isset($_POST['submit'])) {
   //getting the post values
   $courseId = $_POST['courseId'];
@@ -168,7 +173,7 @@ if (isset($_POST['submit'])) {
     <h1 class="headerAS">Add Course</h1>
     <form action="" method="post" enctype="multipart/form-data" name="addCourseF" class="addCourseF">
       <label for="courseId">Course ID:</label>
-      <input type="text" id="courseId" name="courseId"><br>
+      <input type="text" id="courseId" name="courseId" value="<?php echo $courseId; ?>"><br>
       <label for="courseName">Course Name:</label>
       <input type="text" id="courseName" name="courseName"><br>
       <label for="LectureId">Lecture ID:</label>
