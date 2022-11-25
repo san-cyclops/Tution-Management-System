@@ -4,7 +4,7 @@ include('dbconnection.php');
 //Code for deletion
 if (isset($_GET['delid'])) {
   $rid = intval($_GET['delid']);
-  $sql = mysqli_query($con, "delete from tblstudents where ID=$rid");
+  $sql = mysqli_query($con, "delete from tblclass where ID=$rid");
   echo "<script>alert('Data deleted');</script>";
   echo "<script>window.location.href = 'student_view.php'</script>";
 }
@@ -322,10 +322,10 @@ if (isset($_GET['delid'])) {
           <div class="table-title">
             <div class="row">
               <div class="col-sm-5">
-                <h2> Student <b> View </b></h2>
+                <h2> Class <b> View </b></h2>
               </div>
               <div class="col-sm-7" align="right">
-                <a href="student_reg.php" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add New</span></a>
+                <a href="class_add.php" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add New</span></a>
 
               </div>
             </div>
@@ -334,18 +334,15 @@ if (isset($_GET['delid'])) {
             <thead>
               <tr>
                 <th>#</th>
-                <th>RFIDNumber</th>
-                <th>StudentID</th>
-                <th>StudentName</th>
-                <th>NIC</th>
-                <th>Address</th>
-                <th>ContactNumber</th>
-                <th>ProfilePicture</th>
+                <th>CourseId</th>
+                <th>classID</th>
+                <th>className</th>
+                <th>clzStatus</th>
               </tr>
             </thead>
             <tbody>
               <?php
-              $ret = mysqli_query($con, "select * from tblstudents");
+              $ret = mysqli_query($con, "select * from tblclass");
               $cnt = 1;
               $row = mysqli_num_rows($ret);
               if ($row > 0) {
@@ -355,16 +352,13 @@ if (isset($_GET['delid'])) {
                   <!--Fetch the Records -->
                   <tr>
                     <td><?php echo $cnt; ?></td>
-                    <td><?php echo $row['RFIDNumber']; ?> </td>
-                    <td><?php echo $row['StudentID']; ?></td>
-                    <td><?php echo $row['StudentName']; ?></td>
-                    <td><?php echo $row['NIC']; ?></td>
-                    <td> <?php echo $row['Address']; ?></td>
-                    <td> <?php echo $row['ContactNumber']; ?></td>
-                    <td> <img style="width: 25px;background-size:100% 100%;" src="media/<?php  echo $row['ProfilePicture'];?>" name="ProfilePic"/></td>
+                    <td><?php echo $row['courseId']; ?> </td>
+                    <td><?php echo $row['classID']; ?></td>
+                    <td><?php echo $row['className']; ?></td>
+                    <td> <?php echo $row['clzStatus']; ?></td>
                     <td>
-                      <a href="student_edit.php?editid=<?php echo htmlentities($row['ID']); ?>" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                      <a href="student_view.php?delid=<?php echo ($row['ID']); ?>" class="delete" title="Delete" data-toggle="tooltip" onclick="return confirm('Do you really want to Delete ?');"><i class="material-icons">&#xE872;</i></a>
+                      <a href="course_edit.php?editid=<?php echo htmlentities($row['ID']); ?>" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                      <a href="course_view.php?delid=<?php echo ($row['ID']); ?>" class="delete" title="Delete" data-toggle="tooltip" onclick="return confirm('Do you really want to Delete ?');"><i class="material-icons">&#xE872;</i></a>
                     </td>
                   </tr>
                 <?php

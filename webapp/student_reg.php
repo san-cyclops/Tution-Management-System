@@ -8,11 +8,11 @@ include('dbconnection.php');
 $ret = mysqli_query($con, "select max(id) from tblstudents");
 $row = mysqli_fetch_row($ret);
 $val = (int)$row[0] + 1;
-$value = str_pad($val, 10, '0', STR_PAD_LEFT);
+$value = str_pad($val, 8, '0', STR_PAD_LEFT);
 echo $value;
 //return $value;
 
-$StudentID = $value;
+$StudentID = "ST".$value;
 
 $n=10;
 function randomNumber($n) {

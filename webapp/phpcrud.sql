@@ -182,3 +182,11 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2022-11-20 20:32:23
+CREATE TABLE `tblclass` (
+  `ID` int NOT NULL AUTO_INCREMENT,
+  `courseId` varchar(45) DEFAULT NULL,
+  `classID` varchar(45) DEFAULT NULL,
+  `className` varchar(45) DEFAULT NULL,
+  `clzStatus` datetime DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

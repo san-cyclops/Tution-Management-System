@@ -9,11 +9,11 @@ include('dbconnection.php');
 $ret = mysqli_query($con, "select max(id) from tblcourse");
 $row = mysqli_fetch_row($ret);
 $val = (int)$row[0] + 1;
-$value = str_pad($val, 10, '0', STR_PAD_LEFT);
+$value = str_pad($val, 8, '0', STR_PAD_LEFT);
 echo $value;
 //return $value;
 
-$courseId = $value;
+$courseId = "CS".$value;
 
 
 if (isset($_POST['submit'])) {
@@ -29,13 +29,13 @@ if (isset($_POST['submit'])) {
   // Query for data insertion
   $sql = "INSERT INTO tblcourse(courseId,courseName,LectureId,cDay,ctimeS,ctimeE,coursePic) VALUES(?,?,?,?,?,?,?)";
   $statement = $con->prepare($sql);
-  $statement->bind_param('sssssss', $courseId,$courseName,$LectureId,$cDay,$ctimeS,$ctimeE,$imgData);
+  $statement->bind_param('sssssss', $courseId, $courseName, $LectureId, $cDay, $ctimeS, $ctimeE, $imgData);
 
   $current_id = $statement->execute() or die("<b>Error:</b> Problem on Image Insert<br/>" . mysqli_connect_error());
 
 
   if ($current_id) {
-    move_uploaded_file($_FILES["coursePic"]["tmp_name"],"media/".$_FILES["coursePic"]["name"]);
+    move_uploaded_file($_FILES["coursePic"]["tmp_name"], "media/" . $_FILES["coursePic"]["name"]);
     echo "<script>alert('You have successfully inserted the data');</script>";
     echo "<script type='text/javascript'> document.location ='course_view.php'; </script>";
   } else {
@@ -177,15 +177,18 @@ if (isset($_POST['submit'])) {
       <label for="courseName">Course Name:</label>
       <input type="text" id="courseName" name="courseName"><br>
       <label for="LectureId">Lecture ID:</label>
-      <select id="LectureId" name="LectureId">
-        <option value="lect0001">Lect0001</option>
-        <option value="Tuesday">Tuesday</option>
-        <option value="Wednesday">Wednesday</option>
-        <option value="Thursday">Thursday</option>
-        <option value="Friday">Friday</option>
-        <option value="Saturday">Saturday</option>
-        <option value="Sunday">Sunday</option>
-      </select><br>
+      <?php
+      if ($r_set = $con->query("SELECT * from tbllectures")) {
+
+        echo "<select id=LectureId name=LectureId>";
+        while ($row = $r_set->fetch_assoc()) {
+          echo "<option value=$row[tID]>$row[tName]</option>";
+        }
+        echo "</select>";
+      } else {
+        echo $con->error;
+      }
+      ?>
       <label for="cDay">Day:</label>
       <select id="cDay" name="cDay">
         <option value="Monday">Monday</option>
@@ -204,7 +207,7 @@ if (isset($_POST['submit'])) {
       <label for="coursePic">Course Feature Picture:</label>
       <input type="file" id="coursePic" name="coursePic" required><br>
       <br>
-       <input type="submit" id="addCrse" value="Add Course" name="submit">
+      <input type="submit" id="addCrse" value="Add Course" name="submit">
     </form>
 
   </section>
