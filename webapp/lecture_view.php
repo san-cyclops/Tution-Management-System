@@ -325,7 +325,7 @@ if (isset($_GET['delid'])) {
                 <h2> Lecture <b> View </b></h2>
               </div>
               <div class="col-sm-7" align="right">
-                <a href="lecture_reg.php" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add New Student</span></a>
+                <a href="lecture_reg.php" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add New</span></a>
 
               </div>
             </div>
