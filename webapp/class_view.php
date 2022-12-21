@@ -6,7 +6,7 @@ if (isset($_GET['delid'])) {
   $rid = intval($_GET['delid']);
   $sql = mysqli_query($con, "delete from tblclass where ID=$rid");
   echo "<script>alert('Data deleted');</script>";
-  echo "<script>window.location.href = 'student_view.php'</script>";
+  echo "<script>window.location.href = 'class_view.php'</script>";
 }
 ?>
 
@@ -357,8 +357,8 @@ if (isset($_GET['delid'])) {
                     <td><?php echo $row['className']; ?></td>
                     <td> <?php echo $row['clzStatus']; ?></td>
                     <td>
-                      <a href="course_edit.php?editid=<?php echo htmlentities($row['ID']); ?>" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                      <a href="course_view.php?delid=<?php echo ($row['ID']); ?>" class="delete" title="Delete" data-toggle="tooltip" onclick="return confirm('Do you really want to Delete ?');"><i class="material-icons">&#xE872;</i></a>
+                      <a href="class_edit.php?editid=<?php echo htmlentities($row['ID']); ?>" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                      <a href="class_view.php?delid=<?php echo ($row['ID']); ?>" class="delete" title="Delete" data-toggle="tooltip" onclick="return confirm('Do you really want to Delete ?');"><i class="material-icons">&#xE872;</i></a>
                     </td>
                   </tr>
                 <?php
