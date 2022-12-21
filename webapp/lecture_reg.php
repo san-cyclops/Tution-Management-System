@@ -4,6 +4,17 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 include('dbconnection.php');
+include('function.php');
+
+$ret = mysqli_query($con, "select max(id) from tbllectures");
+$row = mysqli_fetch_row($ret);
+$val = (int)$row[0] + 1;
+$value = str_pad($val, 8, '0', STR_PAD_LEFT);
+
+//return $value;
+
+$tID = "LE" . $value;
+
 if (isset($_POST['submit'])) {
   //getting the post values
   $tID = $_POST['tID'];
@@ -15,25 +26,32 @@ if (isset($_POST['submit'])) {
   $phone = $_POST['phone'];
   $email = $_POST['email'];
   $password = $_POST['password'];
-  $imgData = $_FILES['pPic']['name'];
+  $img = $_FILES['pPic'] ?? null;
+  $phone1 = '+94'.$phone;
+  $imagePath = '';
+  if ($img && $img['tmp_name']) {
+    $imagePath = 'mediaLE/' . randomString(8) . '/' . $img['name'];
+  }
 
   // Query for data insertion
-  $sql = "INSERT INTO tbllectures(tID,tName,nic,address,birthday,
-  gender,phone,email,password,pPic) VALUES(?,?,?,?,?,?,?,?,?,?)";
+  $sql = "INSERT INTO tbllectures(tID,tName,NIC,Address,Birthday,
+  Gender,Phone,Email,password,pPic) VALUES(?,?,?,?,?,?,?,?,?,?)";
   $statement = $con->prepare($sql);
-  $statement->bind_param('ssssssssss', $tID, $tName, $nic, $address, $birthday, $gender, $phone, $email, $password, $imgData);
+  $statement->bind_param('ssssssssss', $tID, $tName, $nic, $address, $birthday, $gender, $phone1, $email, $password, $imagePath);
 
   $current_id = $statement->execute() or die("<b>Error:</b> Problem on Image Insert<br/>" . mysqli_connect_error());
 
 
   if ($current_id) {
-    move_uploaded_file($_FILES["pPic"]["tmp_name"], "media/" . $_FILES["pPic"]["name"]);
+    mkdir(dirname($imagePath));
+    move_uploaded_file($_FILES["pPic"]["tmp_name"], $imagePath);
     echo "<script>alert('You have successfully inserted the data');</script>";
     echo "<script type='text/javascript'> document.location ='lecture_view.php'; </script>";
   } else {
     echo "<script>alert('Something Went Wrong. Please try again');</script>";
   }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,149 +73,123 @@ if (isset($_POST['submit'])) {
 <body>
   <div class="sidebar close">
     <div class="logo-details">
-      <a href="userP-Home.html" class="logo"><img src="img/logo.png" alt="logo" /></a>
+      <a href="admin_Home.php" class="logo"><img src="img/logo.png" alt="logo" /></a>
       <span class="logo_name">LeArN</span>
     </div>
     <ul class="nav-links">
       <li>
-        <a href="">
+        <a href="admin_Home.php">
           <i class="bx bxs-grid"></i>
           <span class="link_name">Dashboard</span>
         </a>
         <ul class="sub-menu blank">
-          <li><a href="" class="link_name">Dashboard</a></li>
+          <li><a href="admin_Home.php" class="link_name">Dashboard</a></li>
         </ul>
       </li>
       <li>
         <div class="icon-link">
-          <a href="">
+          <a href="student_view.php">
             <i class="bx bxs-user-detail"></i>
             <span class="link_name">Student</span>
           </a>
-          <i class="bx bxs-chevron-down arrow"></i>
         </div>
-        <ul class="sub-menu">
-          <li class="link-name"><a href="#">Student</a></li>
-          <li><a href="student_reg.html">Student Regitration</a></li>
-          <li><a href="studentEnrlmnt.html">Student Enrollment</a></li>
-          <li><a href="studentUpDlt.html">Student Update/Delete</a></li>
+        <ul class="sub-menu blank">
+          <li class="link-name"><a href="student_view.php">Student</a></li>
         </ul>
       </li>
       <li>
-        <div class="icon-link">
-          <a href="">
-            <i class="bx bx-laptop"></i>
-            <span class="link_name">Course</span>
-          </a>
-          <i class="bx bxs-chevron-down arrow"></i>
-        </div>
-        <ul class="sub-menu">
-          <li class="link-name"><a href="#">Course</a></li>
-          <li><a href="addCourse.html">Add Course</a></li>
-          <li><a href="upDltCourse.html">Update/Delete Course</a></li>
+        <a href="">
+          <i class='bx bx-user-plus'></i>
+          <span class="link_name">Enrollment</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li class="link-name"><a href="#">Enrollment</a></li>
         </ul>
       </li>
       <li>
-        <div class="icon-link">
-          <a href="class.html">
-            <i class="bx bxs-school"></i>
-            <span class="link_name">Class</span>
-          </a>
-
-        </div>
+        <a href="course_view.php">
+          <i class="bx bx-laptop"></i>
+          <span class="link_name">Course</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li class="link-name"><a href="course_view.php">Course</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="class.html">
+          <i class="bx bxs-school"></i>
+          <span class="link_name">Class</span>
+        </a>
         <ul class="sub-menu blank">
           <li class="link-name"><a href="class.html">Class</a></li>
         </ul>
       </li>
       <li>
-        <div class="icon-link">
-          <a href="">
-            <i class="bx bx-bell"></i>
-            <span class="link_name">Notification</span>
-          </a>
-          <i class="bx bxs-chevron-down arrow"></i>
-        </div>
-        <ul class="sub-menu">
-          <li class="link-name"><a href="notification.html">Notification</a></li>
-          <li><a href="notification.html">Add Notification</a></li>
-          <li><a href="upNotification.html">Update Notification</a></li>
+        <a href="allNotification.html">
+          <i class="bx bx-bell"></i>
+          <span class="link_name">Notification</span>
+        </a>
+        <ul class="sub-menu black">
+          <li class="link-name">
+            <a href="allNotification.html">Notification</a>
+          </li>
         </ul>
       </li>
       <li>
-        <div class="icon-link">
-          <a href="">
-            <i class="bx bx-bell"></i>
-            <span class="link_name">Tutor</span>
-          </a>
-          <i class="bx bxs-chevron-down arrow"></i>
-        </div>
-        <ul class="sub-menu">
-          <li class="link-name"><a href="#">Tutor</a></li>
-          <li><a href="lectureReg.html">Add Tutor</a></li>
-          <li><a href="lectureUpDlt.html">Update/ Delete Tutor</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="icon-link">
-          <a href="">
-            <i class="bx bx-file-blank"></i>
-            <span class="link_name">Files</span>
-          </a>
-          <i class="bx bxs-chevron-down arrow"></i>
-        </div>
-        <ul class="sub-menu">
-          <li class="link-name"><a href="#">Files</a></li>
-          <li><a href="addFiles.html">Upload Files</a></li>
-          <li><a href="upDltFiles.html">Update/Delete Files </a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="icon-link">
-          <a href="">
-            <i class="bx bxs-user"></i>
-            <span class="link_name">Staff</span>
-          </a>
-          <i class="bx bxs-chevron-down arrow"></i>
-        </div>
-        <ul class="sub-menu">
-          <li class="link-name"><a href="#">Staff Regitration</a></li>
-          <li><a href="staffReg.html">Staff Regitration</a></li>
-          <li><a href="staffUpDlt.html">Update/Delete Staff</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="icon-link">
-          <a href="attendance.html">
-            <i class="bx bx-calendar-check"></i>
-            <span class="link_name">Attendance</span>
-          </a>
-        </div>
+        <a href="lecture_view.php">
+          <i class='bx bxs-user-voice'></i></i>
+          <span class="link_name">Tutor</span>
+        </a>
         <ul class="sub-menu blank">
-          <li class="link-name "><a href="attendance.html">Attendance</a></li>
+          <li class="link-name"><a href="allTutor.html">Tutor</a></li>
         </ul>
       </li>
       <li>
-        <div class="icon-link">
-          <a href="Payment.html">
-            <i class="bx bx-money"></i>
-            <span class="link_name">Payment</span>
-          </a>
-        </div>
+        <a href="allFile.html">
+          <i class="bx bx-file-blank"></i>
+          <span class="link_name">Files</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li class="link-name"><a href="allFile.html">Files</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="allStaff.html">
+          <i class="bx bxs-user"></i>
+          <span class="link_name">Staff</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li class="link-name"><a href="allStaff.html">Staff</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="attendance.html">
+          <i class="bx bx-calendar-check"></i>
+          <span class="link_name">Attendance</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li class="link-name"><a href="attendance.html">Attendance</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="Payment.html">
+          <i class="bx bx-money"></i>
+          <span class="link_name">Payment</span>
+        </a>
         <ul class="sub-menu blank">
           <li><a href="Payment.html" class="link_name">Payment</a></li>
         </ul>
       </li>
-
     </ul>
   </div>
   <header class="header">
     <div class="toggle">
-      <i class='bx bx-menu'></i>
+      <i class="bx bx-menu"></i>
     </div>
 
     <nav class="navbar">
       <ul>
-        <li><a href=""><img src="../img/user2.jpg" alt=""></a></li>
+        <li><a href=""><img src="img/user2.jpg" alt=""></a></li>
         <li><a href=""><i class="bx bx-bell"></i></a></li>
         <li><a href="#"><i class='bx bx-log-out-circle'></i></a></li>
 
@@ -209,14 +201,14 @@ if (isset($_POST['submit'])) {
   <section class="tutor-reg">
     <h1>Tutor Registration</h1>
 
-    <form action="" method="post" enctype="multipart/form-data" name="tutorReg" class="tutor-regF">
+    <form action="lecture_reg.php" method="post" enctype="multipart/form-data" name="tutorReg" class="tutor-regF">
 
       <label for="tID">Tutor ID:</label>
-      <input type="text" id="tID" name="tID"><br>
+      <input type="text" id="tID" name="tID" value="<?php echo $tID; ?>"><br>
       <label for="tutorName">Tutor Name:</label>
       <input type="text" id="tName" name="tName"><br>
       <label for="nic">NIC:</label>
-      <input type="text" id="nic" name="nic"><br>
+      <input type="text" id="nic" name="nic" minlength="10" maxlength="12"><br>
       <label for="address">Address:</label>
       <input type="text" id="Address" name="address"><br>
       <label for="birthday">Birthday:</label>
@@ -228,13 +220,16 @@ if (isset($_POST['submit'])) {
         <label for="female">Female</label>
       </div>
       <label for="phone">Contact Number:</label>
-      <input type="tel" id="phone" name="phone" required><br>
+      <input type="tel" id="phone" name="phone" pattern="\d{3}[\-]\d{3}[\-]\d{4}" required><br>
+      <div>
+        <p class="cnumber_Message">Phone Number fill with 10 digits and pattern(Ex:071-123-1234)</p>
+      </div>
       <label for="email">Email Address:</label>
       <input type="email" id="email" name="email"><br>
       <label for="password">Password:</label>
       <input type="password" id="password" name="password" required><br>
       <label for="pPic">Profile Picture:</label>
-      <input type="file" id="pPic" name="pPic">
+      <input type="file" id="pPic" name="pPic" accept=".png,.gif,.jpg,jpeg">
 
       <input type="submit" id="addCrse" value="Submit" name="submit">
     </form>

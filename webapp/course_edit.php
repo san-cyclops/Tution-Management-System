@@ -1,8 +1,19 @@
 <?php
 //Database Connection
 include('dbconnection.php');
+require_once('function.php');
+
 if (isset($_POST['submit'])) {
+
   $eid = $_GET['editid'];
+
+  // Getting database Image Value
+  $statement = $dbh->prepare('SELECT * FROM tblcourse WHERE ID =:id');
+  $statement->bindValue(':id', $eid);
+  $statement->execute();
+  $course = $statement->fetch(PDO::FETCH_ASSOC);
+  $imgPath = $course['coursePic'];
+
   //Getting Post Values
   $courseId = $_POST['courseId'];
   $courseName = $_POST['courseName'];
@@ -10,23 +21,32 @@ if (isset($_POST['submit'])) {
   $cDay = $_POST['cDay'];
   $ctimeS = $_POST['ctimeS'];
   $ctimeE = $_POST['ctimeE'];
-  $imgData = $_FILES['coursePic']['name'];
+  $imgData = $_FILES['coursePic'] ?? null;
 
-  move_uploaded_file($_FILES["coursePic"]["tmp_name"],"media/".$_FILES["coursePic"]["name"]);
+  if ($imgData && $imgData['tmp_name']) {
+    if ($course['coursePic']) {
+      unlink($course['coursePic']);
+    }
 
- 
-  $sql="update tblcourse set courseId= :cId, courseName= :courseName, 
+    $imgPath = 'mediaCS/' . randomString(8) . '/' . $imgData['name'];
+    mkdir(dirname($imgPath));
+    move_uploaded_file($_FILES["coursePic"]["tmp_name"], $imgPath);
+  }
+
+
+
+  $sql = "update tblcourse set courseId= :cId, courseName= :courseName, 
   LectureId= :LectureId, cDay= :cDay, ctimeS= :ctimeS, ctimeE= :ctimeE, 
   coursePic=:aimage where ID= :eid";
-  $query = $dbh->prepare($sql);  
-	$query->bindParam(':cId', $courseId,PDO::PARAM_STR);
-  $query->bindParam(':courseName', $courseName,PDO::PARAM_STR);
-  $query->bindParam(':LectureId', $LectureId,PDO::PARAM_STR);
-  $query->bindParam(':cDay', $cDay,PDO::PARAM_STR);
-  $query->bindParam(':ctimeS', $ctimeS,PDO::PARAM_STR);
-  $query->bindParam(':ctimeE', $ctimeE,PDO::PARAM_STR);
-  $query->bindParam(':aimage', $imgData,PDO::PARAM_STR,PDO::PARAM_STR);
-  $query->bindParam(':eid', $eid,PDO::PARAM_STR,PDO::PARAM_STR);
+  $query = $dbh->prepare($sql);
+  $query->bindParam(':cId', $courseId, PDO::PARAM_STR);
+  $query->bindParam(':courseName', $courseName, PDO::PARAM_STR);
+  $query->bindParam(':LectureId', $LectureId, PDO::PARAM_STR);
+  $query->bindParam(':cDay', $cDay, PDO::PARAM_STR);
+  $query->bindParam(':ctimeS', $ctimeS, PDO::PARAM_STR);
+  $query->bindParam(':ctimeE', $ctimeE, PDO::PARAM_STR);
+  $query->bindParam(':aimage', $imgPath, PDO::PARAM_STR, PDO::PARAM_STR);
+  $query->bindParam(':eid', $eid, PDO::PARAM_STR, PDO::PARAM_STR);
   $query->execute();
   if ($query->execute()) {
     echo "<script>alert('You have successfully Updated the data');</script>";
@@ -58,149 +78,123 @@ if (isset($_POST['submit'])) {
 <body>
   <div class="sidebar close">
     <div class="logo-details">
-      <a href="userP-Home.html" class="logo"><img src="img/logo.png" alt="logo" /></a>
+      <a href="admin_Home.php" class="logo"><img src="img/logo.png" alt="logo" /></a>
       <span class="logo_name">LeArN</span>
     </div>
     <ul class="nav-links">
       <li>
-        <a href="">
+        <a href="admin_Home.php">
           <i class="bx bxs-grid"></i>
           <span class="link_name">Dashboard</span>
         </a>
         <ul class="sub-menu blank">
-          <li><a href="" class="link_name">Dashboard</a></li>
+          <li><a href="admin_Home.php" class="link_name">Dashboard</a></li>
         </ul>
       </li>
       <li>
         <div class="icon-link">
-          <a href="">
+          <a href="student_view.php">
             <i class="bx bxs-user-detail"></i>
             <span class="link_name">Student</span>
           </a>
-          <i class="bx bxs-chevron-down arrow"></i>
         </div>
-        <ul class="sub-menu">
-          <li class="link-name"><a href="#">Student</a></li>
-          <li><a href="student_reg.html">Student Regitration</a></li>
-          <li><a href="studentEnrlmnt.html">Student Enrollment</a></li>
-          <li><a href="studentUpDlt.html">Student Update/Delete</a></li>
+        <ul class="sub-menu blank">
+          <li class="link-name"><a href="student_view.php">Student</a></li>
         </ul>
       </li>
       <li>
-        <div class="icon-link">
-          <a href="">
-            <i class="bx bx-laptop"></i>
-            <span class="link_name">Course</span>
-          </a>
-          <i class="bx bxs-chevron-down arrow"></i>
-        </div>
-        <ul class="sub-menu">
-          <li class="link-name"><a href="#">Course</a></li>
-          <li><a href="addCourse.html">Add Course</a></li>
-          <li><a href="upDltCourse.html">Update/Delete Course</a></li>
+        <a href="">
+          <i class='bx bx-user-plus'></i>
+          <span class="link_name">Enrollment</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li class="link-name"><a href="#">Enrollment</a></li>
         </ul>
       </li>
       <li>
-        <div class="icon-link">
-          <a href="class.html">
-            <i class="bx bxs-school"></i>
-            <span class="link_name">Class</span>
-          </a>
-
-        </div>
+        <a href="course_view.php">
+          <i class="bx bx-laptop"></i>
+          <span class="link_name">Course</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li class="link-name"><a href="allCourses.html">Course</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="class.html">
+          <i class="bx bxs-school"></i>
+          <span class="link_name">Class</span>
+        </a>
         <ul class="sub-menu blank">
           <li class="link-name"><a href="class.html">Class</a></li>
         </ul>
       </li>
       <li>
-        <div class="icon-link">
-          <a href="">
-            <i class="bx bx-bell"></i>
-            <span class="link_name">Notification</span>
-          </a>
-          <i class="bx bxs-chevron-down arrow"></i>
-        </div>
-        <ul class="sub-menu">
-          <li class="link-name"><a href="notification.html">Notification</a></li>
-          <li><a href="notification.html">Add Notification</a></li>
-          <li><a href="upNotification.html">Update Notification</a></li>
+        <a href="allNotification.html">
+          <i class="bx bx-bell"></i>
+          <span class="link_name">Notification</span>
+        </a>
+        <ul class="sub-menu black">
+          <li class="link-name">
+            <a href="allNotification.html">Notification</a>
+          </li>
         </ul>
       </li>
       <li>
-        <div class="icon-link">
-          <a href="">
-            <i class="bx bx-bell"></i>
-            <span class="link_name">Tutor</span>
-          </a>
-          <i class="bx bxs-chevron-down arrow"></i>
-        </div>
-        <ul class="sub-menu">
-          <li class="link-name"><a href="#">Tutor</a></li>
-          <li><a href="lectureReg.html">Add Tutor</a></li>
-          <li><a href="lectureUpDlt.html">Update/ Delete Tutor</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="icon-link">
-          <a href="">
-            <i class="bx bx-file-blank"></i>
-            <span class="link_name">Files</span>
-          </a>
-          <i class="bx bxs-chevron-down arrow"></i>
-        </div>
-        <ul class="sub-menu">
-          <li class="link-name"><a href="#">Files</a></li>
-          <li><a href="addFiles.html">Upload Files</a></li>
-          <li><a href="upDltFiles.html">Update/Delete Files </a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="icon-link">
-          <a href="">
-            <i class="bx bxs-user"></i>
-            <span class="link_name">Staff</span>
-          </a>
-          <i class="bx bxs-chevron-down arrow"></i>
-        </div>
-        <ul class="sub-menu">
-          <li class="link-name"><a href="#">Staff Regitration</a></li>
-          <li><a href="staffReg.html">Staff Regitration</a></li>
-          <li><a href="staffUpDlt.html">Update/Delete Staff</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="icon-link">
-          <a href="attendance.html">
-            <i class="bx bx-calendar-check"></i>
-            <span class="link_name">Attendance</span>
-          </a>
-        </div>
+        <a href="lecture_view.php">
+          <i class='bx bxs-user-voice'></i></i>
+          <span class="link_name">Tutor</span>
+        </a>
         <ul class="sub-menu blank">
-          <li class="link-name "><a href="attendance.html">Attendance</a></li>
+          <li class="link-name"><a href="allTutor.html">Tutor</a></li>
         </ul>
       </li>
       <li>
-        <div class="icon-link">
-          <a href="Payment.html">
-            <i class="bx bx-money"></i>
-            <span class="link_name">Payment</span>
-          </a>
-        </div>
+        <a href="allFile.html">
+          <i class="bx bx-file-blank"></i>
+          <span class="link_name">Files</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li class="link-name"><a href="allFile.html">Files</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="allStaff.html">
+          <i class="bx bxs-user"></i>
+          <span class="link_name">Staff</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li class="link-name"><a href="allStaff.html">Staff</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="attendance.html">
+          <i class="bx bx-calendar-check"></i>
+          <span class="link_name">Attendance</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li class="link-name"><a href="attendance.html">Attendance</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="Payment.html">
+          <i class="bx bx-money"></i>
+          <span class="link_name">Payment</span>
+        </a>
         <ul class="sub-menu blank">
           <li><a href="Payment.html" class="link_name">Payment</a></li>
         </ul>
       </li>
-
     </ul>
   </div>
   <header class="header">
     <div class="toggle">
-      <i class='bx bx-menu'></i>
+      <i class="bx bx-menu"></i>
     </div>
 
     <nav class="navbar">
       <ul>
-        <li><a href=""><img src="../img/user2.jpg" alt=""></a></li>
+        <li><a href=""><img src="img/user2.jpg" alt=""></a></li>
         <li><a href=""><i class="bx bx-bell"></i></a></li>
         <li><a href="#"><i class='bx bx-log-out-circle'></i></a></li>
 
@@ -225,24 +219,33 @@ if (isset($_POST['submit'])) {
         <label for="courseName">Course Name:</label>
         <input type="text" id="courseName" name="courseName" value="<?php echo $row['courseName']; ?>"><br>
         <label for="LectureId">Lecture ID:</label>
-        <select id="LectureId" name="LectureId" value="<?php echo $row['LectureId']; ?>">
-          <option value="lect0001">Lect0001</option>
-          <option value="Tuesday">Tuesday</option>
-          <option value="Wednesday">Wednesday</option>
-          <option value="Thursday">Thursday</option>
-          <option value="Friday">Friday</option>
-          <option value="Saturday">Saturday</option>
-          <option value="Sunday">Sunday</option>
+        <?php
+        if ($r_set = $con->query("SELECT * from tbllectures")) {
+
+
+          echo "<select id=LectureId name=LectureId>";
+          while ($l = $r_set->fetch_assoc()) {
+            if ($l['tID'] == $row['tID']) {
+              echo "<option value=$l[tID] selected >$l[tName]</option>";
+            } else {
+              echo "<option value=$l[tID] selected >$l[tName]</option>";
+            }
+          }
+          echo "</select>";
+        } else {
+          echo $con->error;
+        }
+        ?>
         </select><br>
         <label for="cDay">Day:</label>
-        <select id="cDay" name="cDay" value="<?php echo $row['cDay']; ?>">
-          <option value="Monday">Monday</option>
-          <option value="Tuesday">Tuesday</option>
-          <option value="Wednesday">Wednesday</option>
-          <option value="Thursday">Thursday</option>
-          <option value="Friday">Friday</option>
-          <option value="Saturday">Saturday</option>
-          <option value="Sunday">Sunday</option>
+        <select id="cDay" name="cDay">
+          <option value="Monday" <?php if ($row['cDay'] == 'Monday') echo "selected"; ?>>Monday</option>
+          <option value="Tuesday" <?php if ($row['cDay'] == 'Tuesday') echo "selected"; ?>>Tuesday</option>
+          <option value="Wednesday" <?php if ($row['cDay'] == 'Wednesday') echo "selected"; ?>>Wednesday</option>
+          <option value="Thursday" <?php if ($row['cDay'] == 'Thursday') echo "selected"; ?>>Thursday</option>
+          <option value="Friday" <?php if ($row['cDay'] == 'Friday') echo "selected"; ?>>Friday</option>
+          <option value="Saturday" <?php if ($row['cDay'] == 'Saturday') echo "selected"; ?>>Saturday</option>
+          <option value="Sunday" <?php if ($row['cDay'] == 'Sunday') echo "selected"; ?>>Sunday</option>
         </select><br>
         <label for="ctimeS">Time:</label>
         <input type="time" id="ctimeS" name="ctimeS" value="<?php echo $row['ctimeS']; ?>">
@@ -250,8 +253,8 @@ if (isset($_POST['submit'])) {
         <input type="time" id="ctimeE" name="ctimeE" value="<?php echo $row['ctimeE']; ?>">
         <br>
         <label for="coursePic">Course Feature Picture:</label>
-        <input type="file" id="coursePic" name="coursePic" required>
-        <img style="width: 100px;background-size:100% 100%;" src="media/<?php echo $row['coursePic'] ?>" name="Pic" />
+        <input type="file" id="coursePic" name="coursePic" accept=".png,.gif,.jpg,jpeg">
+        <img style="width: 100px;background-size:100% 100%;" src="<?php echo $row['coursePic'] ?>" name="Pic" />
       <?php } ?>
 
       <br>

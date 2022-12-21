@@ -1,3 +1,55 @@
+<?php
+//Database Connection
+include('dbconnection.php');
+
+
+$ret = mysqli_query($con, "select max(id) from tblclass");
+$row = mysqli_fetch_row($ret);
+$val = (int)$row[0] + 1;
+$value = str_pad($val, 8, '0', STR_PAD_LEFT);
+echo $value;
+//return $value;
+
+$courseId = "CL" . $value;
+$userdETAILS= $dbh->prepare("SELECT * FROM tbluser WHERE username = :username ");
+$username= $_SESSION['uname'];
+$userdETAILS->bindValue(':username',$username);
+
+
+if (isset($_POST['submit'])) {
+  $eid = $_GET['editid'];
+  //Getting Post Values
+  $courseId = $_POST['courseId'];
+  $classID = $_POST['classID'];
+  $className = $_POST['className'];
+  $clzStatus = $_POST['clzStatus'];
+
+  move_uploaded_file($_FILES["coursePic"]["tmp_name"], "media/" . $_FILES["coursePic"]["name"]);
+
+
+  $sql = "update tblcourse set courseId= :cId, courseName= :courseName, 
+  LectureId= :LectureId, cDay= :cDay, ctimeS= :ctimeS, ctimeE= :ctimeE, 
+  coursePic=:aimage where ID= :eid";
+  $query = $dbh->prepare($sql);
+  $query->bindParam(':cId', $courseId, PDO::PARAM_STR);
+  $query->bindParam(':courseName', $courseName, PDO::PARAM_STR);
+  $query->bindParam(':LectureId', $LectureId, PDO::PARAM_STR);
+  $query->bindParam(':cDay', $cDay, PDO::PARAM_STR);
+  $query->bindParam(':ctimeS', $ctimeS, PDO::PARAM_STR);
+  $query->bindParam(':ctimeE', $ctimeE, PDO::PARAM_STR);
+  $query->bindParam(':aimage', $imgData, PDO::PARAM_STR, PDO::PARAM_STR);
+  $query->bindParam(':eid', $eid, PDO::PARAM_STR, PDO::PARAM_STR);
+  $query->execute();
+  if ($query->execute()) {
+    echo "<script>alert('You have successfully Updated the data');</script>";
+    echo "<script type='text/javascript'> document.location ='course_view.php'; </script>";
+  } else {
+    echo "<script>alert('Something Went Wrong. Please try again');</script>";
+  }
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,12 +59,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- css style sheet -->
   <link rel="stylesheet" href="css/pUser.css" />
-  <link rel="stylesheet" href="css/attendnce.css" />
+  <link rel="stylesheet" href="css\class.css">
   <!-- font awesome file link -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" />
   <!-- Boxicons CSS -->
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-  <title>Attendance</title>
+  <title>CreateClass</title>
 </head>
 
 <body>
@@ -33,14 +85,14 @@
       </li>
       <li>
         <div class="icon-link">
-          <a href="">
+          <a href="student_view.php">
             <i class="bx bxs-user-detail"></i>
             <span class="link_name">Student</span>
           </a>
           <i class="bx bxs-chevron-down arrow"></i>
         </div>
         <ul class="sub-menu">
-          <li class="link-name"><a href="#">Student</a></li>
+          <li class="link-name"><a href="student_view.php">Student</a></li>
           <li><a href="student_reg.html">Student Regitration</a></li>
           <li><a href="studentEnrlmnt.html">Student Enrollment</a></li>
           <li><a href="studentUpDlt.html">Student Update/Delete</a></li>
@@ -168,48 +220,56 @@
       </div>
     </nav>
   </header>
-  <!-- Student attendance section starts -->
-  <section class="attendance">
-    <h1>Student Attendance</h1>
-    <div class="clzDetails">
-      <label for="classId">Course ID:</label>
-      <select name="classId" id="classId" class="classId" required disabled>
-        <option value="clz1">None</option>
-        <option value="clz2">PHY22-24T-22/10/05</option>
-        <option value="clz3">PHY23-25T-22/10/09</option>
-        <option value="clz4">PHY22R-22/10/20</option>
-      </select>
-    </div>
-    <hr />
-    <div class="rfidTrack">
-      <label for="rfid">RFID Number:</label>
-      <input type="text" id="rfid" name="rfidnu" />
-    </div>
-    <hr />
-    <div class="attendanceProcess">
-      <div class="userdetails">
-        <img src="img\avator.png" alt="userPicture" style="width: 200px; height: auto" />
-        <br />
-        <label for="sID">Student ID:</label>
-        <input type="text" id="sID" name="sID" disabled /><br />
-        <label for="studentName">Student Name:</label>
-        <input type="text" id="sName" name="sName" disabled /><br />
-      </div>
-      <div class="payment-attendP">
-        <div class="paymentDetails">
-          <h1 class="paymentStatus">Payment Done</h1>
-        </div>
-        <div class="attendPermission">
-          <button name="attendAllow" id="attendAllow">Attend Allowed</button>
-          <button name="attendDeny" id="attendDeny">Attend Deny</button>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- Add class section starts -->
 
-  <!-- Student attendace  section ends -->
+  <section class="createClass">
+    <h1 class="headerAclz">Create Class</h1>
+    <form action="" method="post" name="createClassF" class="createClassF">
+      <label for="courseId">Course ID:</label>
+      <?php
+      if ($r_set = $con->query("SELECT * from tblcourse")) {
+
+        echo "<select id=courseId name=courseId>";
+        while ($row = $r_set->fetch_assoc()) {
+          echo "<option value=$row[ID]>$row[courseName]</option>";
+        }
+        echo "</select>";
+      } else {
+        echo $con->error;
+      }
+      ?>
+      <br>
+      <label for="classID">Class ID:</label>
+      <input type="text" id="classID" name="classID"><br>
+      <label for="className">Class Name:</label>
+      <input type="text" id="className" name="className"><br>
+      <label for="classTD">Date and Time:</label>
+      <input type="datetime-local" name="classTD" id="classTD"><br>
+      <label for="clzStatus">Status:</label>
+      <select id="clzStatus" name="clzStatus">
+        <option value="held">Held</option>
+        <option value="cancel">Cancel</option>
+      </select><br>
+
+      <br>
+
+      <input type="submit" value="Creat Class">
+
+
+
+
+    </form>
+
+  </section>
+  <!-- Add class section ends -->
+
+
+
+
   <!-- custom js file -->
   <script src="js/userP.js"></script>
+
+
 </body>
 
 </html>
