@@ -17,135 +17,109 @@
 <body>
   <div class="sidebar close">
     <div class="logo-details">
-      <a href="userP-Home.html" class="logo"><img src="img/logo.png" alt="logo" /></a>
+      <a href="admin_Home.php" class="logo"><img src="img/logo.png" alt="logo" /></a>
       <span class="logo_name">LeArN</span>
     </div>
     <ul class="nav-links">
       <li>
-        <a href="">
+        <a href="admin_Home.php">
           <i class="bx bxs-grid"></i>
           <span class="link_name">Dashboard</span>
         </a>
         <ul class="sub-menu blank">
-          <li><a href="" class="link_name">Dashboard</a></li>
+          <li><a href="admin_Home.php" class="link_name">Dashboard</a></li>
         </ul>
       </li>
       <li>
         <div class="icon-link">
-          <a href="">
+          <a href="student_view.php">
             <i class="bx bxs-user-detail"></i>
             <span class="link_name">Student</span>
           </a>
-          <i class="bx bxs-chevron-down arrow"></i>
         </div>
-        <ul class="sub-menu">
-          <li class="link-name"><a href="#">Student</a></li>
-          <li><a href="student_reg.html">Student Regitration</a></li>
-          <li><a href="studentEnrlmnt.html">Student Enrollment</a></li>
-          <li><a href="studentUpDlt.html">Student Update/Delete</a></li>
+        <ul class="sub-menu blank">
+          <li class="link-name"><a href="student_view.php">Student</a></li>
         </ul>
       </li>
       <li>
-        <div class="icon-link">
-          <a href="allCourses.html">
-            <i class="bx bx-laptop"></i>
-            <span class="link_name">Course</span>
-          </a>
-          <i class="bx bxs-chevron-down arrow"></i>
-        </div>
-        <ul class="sub-menu">
-          <li class="link-name"><a href="allCourses.html">Course</a></li>
-          <li><a href="addCourse.html">Add Course</a></li>
-          <li><a href="upDltCourse.html">Update/Delete Course</a></li>
+        <a href="">
+          <i class='bx bx-user-plus'></i>
+          <span class="link_name">Enrollment</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li class="link-name"><a href="#">Enrollment</a></li>
         </ul>
       </li>
       <li>
-        <div class="icon-link">
-          <a href="class.html">
-            <i class="bx bxs-school"></i>
-            <span class="link_name">Class</span>
-          </a>
-        </div>
+        <a href="course_view.php">
+          <i class="bx bx-laptop"></i>
+          <span class="link_name">Course</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li class="link-name"><a href="course_view.php">Course</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="class.html">
+          <i class="bx bxs-school"></i>
+          <span class="link_name">Class</span>
+        </a>
         <ul class="sub-menu blank">
           <li class="link-name"><a href="class.html">Class</a></li>
         </ul>
       </li>
       <li>
-        <div class="icon-link">
-          <a href="allNotification.html">
-            <i class="bx bx-bell"></i>
-            <span class="link_name">Notification</span>
-          </a>
-          <i class="bx bxs-chevron-down arrow"></i>
-        </div>
-        <ul class="sub-menu">
+        <a href="allNotification.html">
+          <i class="bx bx-bell"></i>
+          <span class="link_name">Notification</span>
+        </a>
+        <ul class="sub-menu black">
           <li class="link-name">
             <a href="allNotification.html">Notification</a>
           </li>
-          <li><a href="notification.html">Add Notification</a></li>
-          <li><a href="upNotification.html">Update Notification</a></li>
         </ul>
       </li>
       <li>
-        <div class="icon-link">
-          <a href="allTutor.html">
-            <i class="bx bx-bell"></i>
-            <span class="link_name">Tutor</span>
-          </a>
-          <i class="bx bxs-chevron-down arrow"></i>
-        </div>
-        <ul class="sub-menu">
+        <a href="lecture_view.php">
+          <i class='bx bxs-user-voice'></i></i>
+          <span class="link_name">Tutor</span>
+        </a>
+        <ul class="sub-menu blank">
           <li class="link-name"><a href="allTutor.html">Tutor</a></li>
-          <li><a href="lectureReg.html">Add Tutor</a></li>
-          <li><a href="lectureUpDlt.html">Update/ Delete Tutor</a></li>
         </ul>
       </li>
       <li>
-        <div class="icon-link">
-          <a href="allFile.html">
-            <i class="bx bx-file-blank"></i>
-            <span class="link_name">Files</span>
-          </a>
-          <i class="bx bxs-chevron-down arrow"></i>
-        </div>
-        <ul class="sub-menu">
+        <a href="allFile.html">
+          <i class="bx bx-file-blank"></i>
+          <span class="link_name">Files</span>
+        </a>
+        <ul class="sub-menu blank">
           <li class="link-name"><a href="allFile.html">Files</a></li>
-          <li><a href="addFiles.html">Upload Files</a></li>
-          <li><a href="upDltFiles.html">Update/Delete Files </a></li>
         </ul>
       </li>
       <li>
-        <div class="icon-link">
-          <a href="allStaff.html">
-            <i class="bx bxs-user"></i>
-            <span class="link_name">Staff</span>
-          </a>
-          <i class="bx bxs-chevron-down arrow"></i>
-        </div>
-        <ul class="sub-menu">
-          <li class="link-name"><a href="allStaff.html">Staff Regitration</a></li>
-          <li><a href="staffReg.html">Staff Regitration</a></li>
-          <li><a href="staffUpDlt.html">Update/Delete Staff</a></li>
+        <a href="allStaff.html">
+          <i class="bx bxs-user"></i>
+          <span class="link_name">Staff</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li class="link-name"><a href="allStaff.html">Staff</a></li>
         </ul>
       </li>
       <li>
-        <div class="icon-link">
-          <a href="attendance.html">
-            <i class="bx bx-calendar-check"></i>
-            <span class="link_name">Attendance</span>
-          </a>
-        </div>
+        <a href="attendance.html">
+          <i class="bx bx-calendar-check"></i>
+          <span class="link_name">Attendance</span>
+        </a>
         <ul class="sub-menu blank">
           <li class="link-name"><a href="attendance.html">Attendance</a></li>
         </ul>
       </li>
       <li>
-        <div class="icon-link">
-          <a href="Payment.html">
-            <i class="bx bx-money"></i>
-            <span class="link_name">Payment</span>
-          </a>
-        </div>
+        <a href="Payment.html">
+          <i class="bx bx-money"></i>
+          <span class="link_name">Payment</span>
+        </a>
         <ul class="sub-menu blank">
           <li><a href="Payment.html" class="link_name">Payment</a></li>
         </ul>
@@ -160,7 +134,7 @@
     <nav class="navbar">
       <ul>
         <li>
-          <a href=""><img src="../img/user2.jpg" alt="" /></a>
+          <a href=""><img src="img/user2.jpg" alt="" /></a>
         </li>
         <li>
           <a href=""><i class="bx bx-bell"></i></a>
@@ -184,15 +158,15 @@
       </div>
     </div>
     <div class="adminLink">
-      <a href="#">STUDENT</a>
-      <a href="allCourses.html">COURSE</a>
-      <a href="class.html">CLASS</a>
-      <a href="allNotification.html">NOTIFICATION</a>
-      <a href="allTutor.html">TUTOR</a>
-      <a href="allFile.html">FILES</a>
-      <a href="allStaff.html">STAFF</a>
-      <a href="attendance.html">ATTENDANCE</a>
-      <a href="Payment.html">PAYMENT</a>
+      <a href="student_view.php">STUDENT</a>
+      <a href="course_view.php">COURSE</a>
+      <a href="class_view.php">CLASS</a>
+      <!-- <a href="allNotification.html">NOTIFICATION</a> -->
+      <a href="lecture_view.php">TUTOR</a>
+      <!-- <a href="allFile.html">FILES</a>
+      <a href="allStaff.html">STAFF</a> -->
+      <a href="attendance.php">ATTENDANCE</a>
+      <!-- <a href="Payment.html">PAYMENT</a> -->
     </div>
   </section>
 
