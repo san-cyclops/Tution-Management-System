@@ -4,33 +4,27 @@ include('dbconnection.php');
 if (isset($_POST['submit'])) {
   $eid = $_GET['editid'];
   //Getting Post Values
-  $courseId = $_POST['courseId'];
-  $courseName = $_POST['courseName'];
-  $LectureId = $_POST['LectureId'];
-  $cDay = $_POST['cDay'];
-  $ctimeS = $_POST['ctimeS'];
-  $ctimeE = $_POST['ctimeE'];
-  $imgData = $_FILES['coursePic']['name'];
+    $clzTime = $_POST['clzTime'];
+    $classID = $_POST['classID'];
+    $courseId = $_POST['courseId'];
+    $className = $_POST['className'];
 
-  move_uploaded_file($_FILES["coursePic"]["tmp_name"],"media/".$_FILES["coursePic"]["name"]);
+    $clzStatus = $_POST['clzStatus'];
 
- 
-  $sql="update tblcourse set courseId= :cId, courseName= :courseName, 
-  LectureId= :LectureId, cDay= :cDay, ctimeS= :ctimeS, ctimeE= :ctimeE, 
-  coursePic=:aimage where ID= :eid";
+
+  $sql="update tblclass set courseId= :cId, classID= :classID, 
+  className= :className, clzTime= :clzTime, clzStatus= :clzStatus where ID= :eid";
   $query = $dbh->prepare($sql);  
 	$query->bindParam(':cId', $courseId,PDO::PARAM_STR);
-  $query->bindParam(':courseName', $courseName,PDO::PARAM_STR);
-  $query->bindParam(':LectureId', $LectureId,PDO::PARAM_STR);
-  $query->bindParam(':cDay', $cDay,PDO::PARAM_STR);
-  $query->bindParam(':ctimeS', $ctimeS,PDO::PARAM_STR);
-  $query->bindParam(':ctimeE', $ctimeE,PDO::PARAM_STR);
-  $query->bindParam(':aimage', $imgData,PDO::PARAM_STR,PDO::PARAM_STR);
+  $query->bindParam(':classID', $classID,PDO::PARAM_STR);
+  $query->bindParam(':className', $className,PDO::PARAM_STR);
+  $query->bindParam(':clzTime', $clzTime,PDO::PARAM_STR);
+  $query->bindParam(':clzStatus', $clzStatus,PDO::PARAM_STR);
   $query->bindParam(':eid', $eid,PDO::PARAM_STR,PDO::PARAM_STR);
   $query->execute();
   if ($query->execute()) {
     echo "<script>alert('You have successfully Updated the data');</script>";
-    echo "<script type='text/javascript'> document.location ='course_view.php'; </script>";
+    echo "<script type='text/javascript'> document.location ='class_view.php'; </script>";
   } else {
     echo "<script>alert('Something Went Wrong. Please try again');</script>";
   }
@@ -212,34 +206,46 @@ if (isset($_POST['submit'])) {
 
   <section class="createClass">
     <h1 class="headerAclz">Create Class</h1>
-    <form action="" method="post" name="createClassF" class="createClassF">
+    <form action="" method="post" enctype="multipart/form-data" name="createClassF" class="createClassF">
+            <?php
+            $eid = $_GET['editid'];
+            $ret = mysqli_query($con, "select * from tblclass where ID='$eid'");
+            while ($row = mysqli_fetch_array($ret)) {
+            ?>
+
       <label for="courseId">Course ID:</label>
-      <select name="courseId" id="courseId" class="courseId" required>
-        <option value="p1">None</option>
-        <option value="p2">PHY22-24T</option>
-        <option value="p3">PHY23-25T</option>
-        <option value="p4">PHY22R</option>
-      </select><br>
+                <?php $valcourseId = $row['courseId']; ?>"
+                <?php
+                if ($r_set = $con->query("SELECT * from tblcourse")) {
+
+                    echo "<select id=courseId name=courseId>";
+                    while ($rowx = $r_set->fetch_assoc()) {
+                        echo "<option value=$rowx[ID]  ($rowx[courseName]=$valcourseId) ? ('selected') : (''); >$rowx[courseName]</option>";
+                    }
+                    echo "</select>";
+                } else {
+                    echo $con->error;
+                }
+                ?>
+        <br>
       <label for="classID">Class ID:</label>
-      <input type="text" id="classID" name="classID"><br>
+      <input type="text" id="classID" name="classID" value="<?php echo $row['classID']; ?>"><br>
       <label for="className">Class Name:</label>
-      <input type="text" id="className" name="className"><br>
+      <input type="text" id="className" name="className" value="<?php echo $row['className']; ?>"><br>
       <label for="clzStatus">Date and Time:</label>
-      <input type="datetime-local" name="classTD" id="classTD"><br>
+      <input type="datetime-local" name="clzTime" id="clzTime" value="<?php echo $row['clzTime']; ?>"><br>
       <label for="clzStatus">Status:</label>
-      <select id="clzStatus" name="clzStatus">
+      <select id="clzStatus" name="clzStatus" value="<?php echo $row['clzStatus']; ?>">
         <option value="held">Held</option>
         <option value="cancel">Cancel</option>
       </select><br>
 
       <br>
 
-      <input type="submit" value="Creat Class">
+            <?php } ?>
 
-
-
-
-    </form>
+        <br>
+        <input id="addCrse" type="submit" value="Update Class" name="submit">
 
   </section>
   <!-- Add class section ends -->
