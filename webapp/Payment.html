@@ -1,47 +1,3 @@
-<?php
-
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-//Database Connection
-include('dbconnection.php');
-
-$ret = mysqli_query($con, "select max(id) from tblclass");
-$row = mysqli_fetch_row($ret);
-$val = (int)$row[0] + 1;
-$value = str_pad($val, 8, '0', STR_PAD_LEFT);
-// echo $value;
-//return $value;
-
-$classID = "CL".$value;
-
-
-if (isset($_POST['submit'])) {
-    //Getting Post Values
-    $courseId = $_POST['courseId'];
-    $className = $_POST['className'];
-    $clzTime = $_POST['clzTime'];
-    $clzStatus = $_POST['clzStatus'];
-
-
-
-    $sql = "INSERT INTO tblclass(courseId,classID,className,clzTime,clzStatus) VALUES(?,?,?,?,?)";
-    $statement = $con->prepare($sql);
-    $statement->bind_param('sssss', $courseId,$classID, $className,$clzTime, $clzStatus);
-
-    $current_id = $statement->execute() or die("<b>Error:</b> Problem on Insert<br/>" . mysqli_connect_error());
-
-
-    if ($current_id) {
-        echo "<script>alert('You have successfully inserted the data');</script>";
-        echo "<script type='text/javascript'> document.location ='class_view.php'; </script>";
-    } else {
-        echo "<script>alert('Something Went Wrong. Please try again');</script>";
-    }
-}
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,12 +7,12 @@ if (isset($_POST['submit'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- css style sheet -->
   <link rel="stylesheet" href="css/pUser.css" />
-  <link rel="stylesheet" href="css\class.css">
+  <link rel="stylesheet" href="css/payment.css">
   <!-- font awesome file link -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" />
   <!-- Boxicons CSS -->
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-  <title>CreateClass</title>
+  <title>User Portal/payment</title>
 </head>
 
 <body>
@@ -212,50 +168,32 @@ if (isset($_POST['submit'])) {
       </div>
     </nav>
   </header>
-  <!-- Add class section starts -->
+  <!-- Add Payment section starts -->
 
-  <section class="createClass">
-    <h1 class="headerAclz">Create Class</h1>
-    <form action="" method="post" enctype="multipart/form-data" name="createClassF" class="createClassF">
-      <label for="courseId">Course ID:</label>
-      
-      <?php
-      if ($r_set = $con->query("SELECT * from tblcourse")) {
-
-        echo "<select id=courseId name=courseId>";
-        while ($row = $r_set->fetch_assoc()) {
-          echo "<option value=$row[ID]>$row[courseName]</option>";
-        }
-        echo "</select>";
-      } else {
-        echo $con->error;
-      }
-      ?>
-
-
-      <br>
-      <label for="classID">Class ID:</label>
-      <input type="text" id="courseId" name="courseId" value="<?php echo $classID; ?>"><br>
-      <label for="className">Class Name:</label>
-      <input type="text" id="className" name="className"><br>
-      <label for="clzTime">Date and Time:</label>
-      <input type="datetime-local" name="clzTime" id="clzTime"><br>
-      <label for="clzStatus">Status:</label>
-      <select id="clzStatus" name="clzStatus">
-        <option value="held">Held</option>
-        <option value="cancel">Cancel</option>
+  <section class="addPayment">
+    <h1 class="headerAP">Payment</h1>
+    <form action="" method="post" name="addPaymentF" class="addPaymentF">
+      <label for="rfID">RFID Number:</label>
+      <input type="text" id="rfID" name="rfID"><br>
+      <label for="studentID">Student ID:</label>
+      <input type="text" id="studentID" name="studentID"><br>
+      <label for="studentName">Student Name:</label>
+      <input type="text" id="studentName" name="studentName"><br>
+      <label for="courseID">Course ID</label>
+      <select id="fileType" name="fileType">
+        <option value="video">Video</option>
+        <option value="tuite">Tuite</option>
+        <option value="note">Notes</option>
       </select><br>
-
-      <br>
-
-        <input type="submit" id="addCrse" value="Add Class" name="submit">
-
-
-
+      <label for="pAmount">Payment Amount:</label>
+      <input type="number" id="pAmount" name="pAmount"><br>
+      <label for="pDate">Date and Time:</label>
+      <input type="datetime-local" id="pDate" name="pDate"><br>
+      <button name="addpayment" class="addpaymentbtn">Add Payment</button>
     </form>
 
   </section>
-  <!-- Add class section ends -->
+  <!-- Add Payment section ends -->
 
 
 
