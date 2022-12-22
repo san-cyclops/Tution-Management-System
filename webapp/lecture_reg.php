@@ -45,11 +45,25 @@ if (isset($_POST['submit'])) {
   if ($current_id) {
     mkdir(dirname($imagePath));
     move_uploaded_file($_FILES["pPic"]["tmp_name"], $imagePath);
-    echo "<script>alert('You have successfully inserted the data');</script>";
-    echo "<script type='text/javascript'> document.location ='lecture_view.php'; </script>";
+    #echo "<script>alert('You have successfully inserted the data');</script>";
+    #echo "<script type='text/javascript'> document.location ='lecture_view.php'; </script>";
   } else {
     echo "<script>alert('Something Went Wrong. Please try again');</script>";
   }
+
+    $sql = mysqli_query($con, "delete from tblusers where username=$email");
+    #echo "<script>alert('Data deleted');</script>";
+    $query=mysqli_query($con, "insert into tblusers(FirstName,LastName, MobileNumber, Email, Address,CreationDate,username,password,userRole) 
+    value('$tName','$tName', '$phone', '$email', '$address', NOW(),'$email','$password','' )");
+    if ($query) {
+        echo "<script>alert('You have successfully inserted User data');</script>";
+        echo "<script type='text/javascript'> document.location ='lecture_view.php'; </script>";
+    }
+    else
+    {
+        echo "<script>alert('Something Went Wrong. Please try again');</script>";
+        echo "<script type='text/javascript'> document.location ='lecture_view.php'; </script>";
+    }
 }
 
 ?>

@@ -41,9 +41,9 @@ if (isset($_POST['submit'])) {
     $imagePath = 'mediaST/' . randomString(8) . '/' . $img['name'];
   }
 
-
+    $sql = mysqli_query($con, "delete from tblusers where username=$EmailAddress");
     $query=mysqli_query($con, "insert into tblusers(FirstName,LastName, MobileNumber, Email, Address,CreationDate,username,password) 
-    value('$StudentName','', '$ContactNumber', '$EmailAddress', '$Address', NOW(),'$StudentName', )");
+    value('$StudentName','', '$ContactNumber', '$EmailAddress', '$Address', NOW(),'$EmailAddress','$Password' )");
     if ($query) {
         echo "<script>alert('You have successfully inserted User data');</script>";
     }
