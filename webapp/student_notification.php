@@ -4,9 +4,7 @@ include('dbconnection.php');
 //Code for deletion
 if (isset($_GET['delid'])) {
   $rid = intval($_GET['delid']);
-  $sql = mysqli_query($con, "delete from tblstudents where ID=$rid");
-  echo "<script>alert('Data deleted');</script>";
-  echo "<script>window.location.href = 'student_view.php'</script>";
+
 }
 $search = $_GET['search'] ?? '';
 if ($search) {
@@ -43,7 +41,25 @@ $student = $statement->fetchAll(PDO::FETCH_ASSOC);
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
   <title>Admin Portal</title>
 </head>
+<style>
+    .button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
 
+    .button1 {font-size: 10px;}
+    .button2 {font-size: 12px;}
+    .button3 {font-size: 16px;}
+    .button4 {font-size: 20px;}
+    .button5 {font-size: 24px;}
+</style>
 <body>
   <div class="sidebar close">
     <div class="logo-details">
@@ -177,7 +193,7 @@ $student = $statement->fetchAll(PDO::FETCH_ASSOC);
           <div class="table-title">
             <div class="row">
               <div class="col-sm-4">
-                <h2> Student <b> View </b></h2>
+                <h2> Notification <b> View </b></h2>
               </div>
               <div class="col-sm-4">
                 <form action="">
@@ -193,6 +209,9 @@ $student = $statement->fetchAll(PDO::FETCH_ASSOC);
               </div>
             </div>
           </div>
+            <div class="col-sm-4">
+                <input class="button button1" type="submit" value="Send Email to All Student >>" name="submit">
+            </div>
           <table class="table table-striped table-hover">
             <thead>
               <tr>
@@ -223,8 +242,8 @@ $student = $statement->fetchAll(PDO::FETCH_ASSOC);
                   <td> <?php echo $student['ContactNumber']; ?></td>
                   <td> <img style="width: 25px;background-size:100% 100%;" src="<?php echo $student['ProfilePicture']; ?>" name="ProfilePic" /></td>
                   <td>
-                    <a href="student_edit.php?editid=<?php echo htmlentities($student['ID']); ?>" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                    <a href="student_view.php?delid=<?php echo ($student['ID']); ?>" class="delete" title="Delete" data-toggle="tooltip" onclick="return confirm('Do you really want to Delete ?');"><i class="material-icons">&#xE872;</i></a>
+                    <a href="student_edit.php?editid=<?php echo htmlentities($student['ID']); ?>" class="arrow" title="arrow" data-toggle="tooltip"><i class="fas fa-angle-double-right">&#xE25d4;</i></a>
+
                   </td>
                 </tr>
               <?php } ?>

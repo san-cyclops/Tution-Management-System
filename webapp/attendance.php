@@ -1,3 +1,11 @@
+<?php
+//Database Connection
+include('dbconnection.php');
+require_once('function.php');
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +22,25 @@
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
   <title>Attendance</title>
 </head>
+<style>
+    .button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
 
+    .button2 {background-color: #008CBA;} /* Blue */
+    .button3 {background-color: #f44336;} /* Red */
+    .button4 {background-color: #e7e7e7; color: black;} /* Gray */
+    .button5 {background-color: #555555;} /* Black */
+</style>
 <body>
   <div class="sidebar close">
     <div class="logo-details">
@@ -171,19 +197,13 @@
   <!-- Student attendance section starts -->
   <section class="attendance">
     <h1>Student Attendance</h1>
-    <div class="clzDetails">
-      <label for="classId">Course ID:</label>
-      <select name="classId" id="classId" class="classId" required disabled>
-        <option value="clz1">None</option>
-        <option value="clz2">PHY22-24T-22/10/05</option>
-        <option value="clz3">PHY23-25T-22/10/09</option>
-        <option value="clz4">PHY22R-22/10/20</option>
-      </select>
-    </div>
+
     <hr />
     <div class="rfidTrack">
       <label for="rfid">RFID Number:</label>
       <input type="text" id="rfid" name="rfidnu" />
+        <button class="button button2"> Verify </button>
+
     </div>
     <hr />
     <div class="attendanceProcess">
@@ -192,8 +212,18 @@
         <br />
         <label for="sID">Student ID:</label>
         <input type="text" id="sID" name="sID" disabled /><br />
+          <input type="text" value="<?php echo $row['StudentID']; ?>" id="sID" name="StudentID"><br>
         <label for="studentName">Student Name:</label>
         <input type="text" id="sName" name="sName" disabled /><br />
+          <div class="clzDetails">
+              <label for="classId">Course ID:</label>
+              <select name="classId" id="classId" class="classId" required disabled>
+                  <option value="clz1">None</option>
+                  <option value="clz2">PHY22-24T-22/10/05</option>
+                  <option value="clz3">PHY23-25T-22/10/09</option>
+                  <option value="clz4">PHY22R-22/10/20</option>
+              </select>
+          </div>
       </div>
       <div class="payment-attendP">
         <div class="paymentDetails">
