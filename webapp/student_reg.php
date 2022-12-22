@@ -25,7 +25,7 @@ if (isset($_POST['submit'])) {
   $StudentName = $_POST['StudentName'];
   $NIC = $_POST['NIC'];
   $Address = $_POST['Address'];
-  $Gender = "test";  //$_POST['Gender'];
+  $Gender = "Male";  //$_POST['Gender'];
   $Birthday = $_POST['Birthday'];
   $ContactNumber = $_POST['ContactNumber'];
   $EmailAddress = $_POST['EmailAddress'];
@@ -42,6 +42,18 @@ if (isset($_POST['submit'])) {
   }
 
 
+    $query=mysqli_query($con, "insert into tblusers(FirstName,LastName, MobileNumber, Email, Address,CreationDate,username,password) 
+    value('$StudentName','', '$ContactNumber', '$EmailAddress', '$Address', NOW(),'$StudentName', )");
+    if ($query) {
+        echo "<script>alert('You have successfully inserted User data');</script>";
+    }
+    else
+    {
+        echo "<script>alert('Something Went Wrong. Please try again');</script>";
+    }
+
+
+
   // Query for data insertion
   $sql = "INSERT INTO tblstudents(RFIDNumber,StudentID,StudentName,NIC,Address,Gender,Birthday,ContactNumber,EmailAddress,Password,ProfilePicture,ParentName,ParentContactNumber,ParentEmailAddress) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
   $statement = $con->prepare($sql);
@@ -53,7 +65,6 @@ if (isset($_POST['submit'])) {
 
   $current_id = $statement->execute() or die("<b>Error:</b> Problem on Image Insert<br/>" . mysqli_connect_error());
 
-
   if ($current_id) {
     mkdir(dirname($imagePath));
     move_uploaded_file($_FILES["ProfilePicture"]["tmp_name"], $imagePath);
@@ -62,6 +73,11 @@ if (isset($_POST['submit'])) {
   } else {
     echo "<script>alert('Something Went Wrong. Please try again');</script>";
   }
+
+
+
+
+
 }
 ?>
 

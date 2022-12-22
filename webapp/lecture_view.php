@@ -222,10 +222,10 @@ $lecturer = $statement->fetchAll(PDO::FETCH_ASSOC);
                   <td><?php echo $i + 1; ?></td>
                   <td><?php echo $lecturer['tID']; ?> </td>
                   <td><?php echo $lecturer['tName']; ?></td>
-                  <td><?php echo $lecturer['Address']; ?></td>
-                  <td><?php echo $lecturer['Phone']; ?></td>
-                  <td> <?php echo $lecturer['NIC']; ?></td>
-                  <td> <?php echo $lecturer['Email']; ?></td>
+                  <td><?php echo $lecturer['address']; ?></td>
+                  <td><?php echo $lecturer['phone']; ?></td>
+                  <td> <?php echo $lecturer['nic']; ?></td>
+                  <td> <?php echo $lecturer['email']; ?></td>
                   <td> <img style="width: 25px;background-size:100% 100%;" src="<?php echo $lecturer['pPic']; ?>" name="ProfilePic" /></td>
                   <td>
                     <a href="lecture_edit.php?editid=<?php echo htmlentities($lecturer['ID']); ?>" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>

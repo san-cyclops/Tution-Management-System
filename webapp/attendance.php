@@ -81,8 +81,8 @@
           <i class="bx bxs-chevron-down arrow"></i>
         </div>
         <ul class="sub-menu">
-          <li class="link-name"><a href="notification.html">Notification</a></li>
-          <li><a href="notification.html">Add Notification</a></li>
+          <li class="link-name"><a href="notification.php">Notification</a></li>
+          <li><a href="notification.php">Add Notification</a></li>
           <li><a href="upNotification.html">Update Notification</a></li>
         </ul>
       </li>

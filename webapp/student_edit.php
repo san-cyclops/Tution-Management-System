@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
   $StudentName = $_POST['StudentName'];
   $NIC = $_POST['NIC'];
   $Address = $_POST['Address'];
-  $Gender = $_POST['Gender'];
+  $Gender = "Male"; //$_POST['Gender'];
   $Birthday = $_POST['Birthday'];
   $ContactNumber = $_POST['ContactNumber'];
   $EmailAddress = $_POST['EmailAddress'];
@@ -38,7 +38,6 @@ if (isset($_POST['submit'])) {
     mkdir(dirname($imgPath));
     move_uploaded_file($img['tmp_name'], $imgPath);
   }
-
 
   // $aimage  = $_FILES['imagename']['name'];
   // move_uploaded_file($_FILES["imagename"]["tmp_name"], "media/" . $_FILES["imagename"]["name"]);
@@ -68,11 +67,26 @@ if (isset($_POST['submit'])) {
   $query->bindParam(':eid', $eid, PDO::PARAM_STR, PDO::PARAM_STR);
   $query->execute();
   if ($query->execute()) {
-    echo "<script>alert('You have successfully Updated the data');</script>";
-    echo "<script type='text/javascript'> document.location ='student_view.php'; </script>";
+    #echo "<script>alert('You have successfully Updated the data');</script>";
+
   } else {
     echo "<script>alert('Something Went Wrong. Please try again');</script>";
   }
+
+    $sql = mysqli_query($con, "delete from tblusers where username=$EmailAddress");
+    #echo "<script>alert('Data deleted');</script>";
+    $query=mysqli_query($con, "insert into tblusers(FirstName,LastName, MobileNumber, Email, Address,CreationDate,username,password) 
+    value('$StudentName','', '$ContactNumber', '$EmailAddress', '$Address', NOW(),'$StudentName','$Password' )");
+    if ($query) {
+        echo "<script>alert('You have successfully inserted User data');</script>";
+        echo "<script type='text/javascript'> document.location ='student_view.php'; </script>";
+    }
+    else
+    {
+        echo "<script>alert('Something Went Wrong. Please try again');</script>";
+        echo "<script type='text/javascript'> document.location ='student_view.php'; </script>";
+    }
+
 }
 ?>
 

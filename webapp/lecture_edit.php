@@ -64,6 +64,21 @@ if (isset($_POST['submit'])) {
   } else {
     echo "<script>alert('Something Went Wrong. Please try again');</script>";
   }
+
+    $sql = mysqli_query($con, "delete from tblusers where username=$email");
+    #echo "<script>alert('Data deleted');</script>";
+    $query=mysqli_query($con, "insert into tblusers(FirstName,LastName, MobileNumber, Email, Address,CreationDate,username,password) 
+    value('$tName','', '$phone', '$email', '$address', NOW(),'$tName','$password' )");
+    if ($query) {
+        echo "<script>alert('You have successfully inserted User data');</script>";
+        echo "<script type='text/javascript'> document.location ='student_view.php'; </script>";
+    }
+    else
+    {
+        echo "<script>alert('Something Went Wrong. Please try again');</script>";
+        echo "<script type='text/javascript'> document.location ='student_view.php'; </script>";
+    }
+
 }
 ?>
 
