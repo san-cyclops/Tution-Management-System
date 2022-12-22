@@ -4,33 +4,27 @@ include('dbconnection.php');
 if (isset($_POST['submit'])) {
   $eid = $_GET['editid'];
   //Getting Post Values
-  $courseId = $_POST['courseId'];
-  $courseName = $_POST['courseName'];
-  $LectureId = $_POST['LectureId'];
-  $cDay = $_POST['cDay'];
-  $ctimeS = $_POST['ctimeS'];
-  $ctimeE = $_POST['ctimeE'];
-  $imgData = $_FILES['coursePic']['name'];
+    $clzTime = $_POST['clzTime'];
+    $classID = $_POST['classID'];
+    $courseId = $_POST['courseId'];
+    $className = $_POST['className'];
 
-  move_uploaded_file($_FILES["coursePic"]["tmp_name"], "media/" . $_FILES["coursePic"]["name"]);
+    $clzStatus = $_POST['clzStatus'];
 
 
-  $sql = "update tblcourse set courseId= :cId, courseName= :courseName, 
-  LectureId= :LectureId, cDay= :cDay, ctimeS= :ctimeS, ctimeE= :ctimeE, 
-  coursePic=:aimage where ID= :eid";
-  $query = $dbh->prepare($sql);
-  $query->bindParam(':cId', $courseId, PDO::PARAM_STR);
-  $query->bindParam(':courseName', $courseName, PDO::PARAM_STR);
-  $query->bindParam(':LectureId', $LectureId, PDO::PARAM_STR);
-  $query->bindParam(':cDay', $cDay, PDO::PARAM_STR);
-  $query->bindParam(':ctimeS', $ctimeS, PDO::PARAM_STR);
-  $query->bindParam(':ctimeE', $ctimeE, PDO::PARAM_STR);
-  $query->bindParam(':aimage', $imgData, PDO::PARAM_STR, PDO::PARAM_STR);
-  $query->bindParam(':eid', $eid, PDO::PARAM_STR, PDO::PARAM_STR);
+  $sql="update tblclass set courseId= :cId, classID= :classID, 
+  className= :className, clzTime= :clzTime, clzStatus= :clzStatus where ID= :eid";
+  $query = $dbh->prepare($sql);  
+	$query->bindParam(':cId', $courseId,PDO::PARAM_STR);
+  $query->bindParam(':classID', $classID,PDO::PARAM_STR);
+  $query->bindParam(':className', $className,PDO::PARAM_STR);
+  $query->bindParam(':clzTime', $clzTime,PDO::PARAM_STR);
+  $query->bindParam(':clzStatus', $clzStatus,PDO::PARAM_STR);
+  $query->bindParam(':eid', $eid,PDO::PARAM_STR,PDO::PARAM_STR);
   $query->execute();
   if ($query->execute()) {
     echo "<script>alert('You have successfully Updated the data');</script>";
-    echo "<script type='text/javascript'> document.location ='course_view.php'; </script>";
+    echo "<script type='text/javascript'> document.location ='class_view.php'; </script>";
   } else {
     echo "<script>alert('Something Went Wrong. Please try again');</script>";
   }
@@ -73,145 +67,14 @@ if (isset($_POST['submit'])) {
       </li>
       <li>
         <div class="icon-link">
-          <a href="student_view.php">
+          <a href="">
             <i class="bx bxs-user-detail"></i>
             <span class="link_name">Student</span>
           </a>
           <i class="bx bxs-chevron-down arrow"></i>
         </div>
         <ul class="sub-menu">
-          <li class="link-name"><a href="student_view.php">Student</a></li>
-          <li><a href="student_reg.html">Student Regitration</a></li>
-          <li><a href="studentEnrlmnt.html">Student Enrollment</a></li>
-          <li><a href="studentUpDlt.html">Student Update/Delete</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="icon-link">
-          <a href="">
-            <i class="bx bx-laptop"></i>
-            <span class="link_name">Course</span>
-          </a>
-          <i class="bx bxs-chevron-down arrow"></i>
-        </div>
-        <ul class="sub-menu">
-          <li class="link-name"><a href="#">Course</a></li>
-          <li><a href="addCourse.html">Add Course</a></li>
-          <li><a href="upDltCourse.html">Update/Delete Course</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="icon-link">
-          <a href="class.html">
-            <i class="bx bxs-school"></i>
-            <span class="link_name">Class</span>
-          </a>
-
-        </div>
-        <ul class="sub-menu blank">
-          <li class="link-name"><a href="class.html">Class</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="icon-link">
-          <a href="">
-            <i class="bx bx-bell"></i>
-            <span class="link_name">Notification</span>
-          </a>
-          <i class="bx bxs-chevron-down arrow"></i>
-        </div>
-        <ul class="sub-menu">
-          <li class="link-name"><a href="notification.html">Notification</a></li>
-          <li><a href="notification.html">Add Notification</a></li>
-          <li><a href="upNotification.html">Update Notification</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="icon-link">
-          <a href="">
-            <i class="bx bx-bell"></i>
-            <span class="link_name">Tutor</span>
-          </a>
-          <i class="bx bxs-chevron-down arrow"></i>
-        </div>
-        <ul class="sub-menu">
-          <li class="link-name"><a href="#">Tutor</a></li>
-          <li><a href="lectureReg.html">Add Tutor</a></li>
-          <li><a href="lectureUpDlt.html">Update/ Delete Tutor</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="icon-link">
-          <a href="">
-            <i class="bx bx-file-blank"></i>
-            <span class="link_name">Files</span>
-          </a>
-          <i class="bx bxs-chevron-down arrow"></i>
-        </div>
-        <ul class="sub-menu">
-          <li class="link-name"><a href="#">Files</a></li>
-          <li><a href="addFiles.html">Upload Files</a></li>
-          <li><a href="upDltFiles.html">Update/Delete Files </a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="icon-link">
-          <a href="">
-            <i class="bx bxs-user"></i>
-            <span class="link_name">Staff</span>
-          </a>
-          <i class="bx bxs-chevron-down arrow"></i>
-        </div>
-        <ul class="sub-menu">
-          <li class="link-name"><a href="#">Staff Regitration</a></li>
-          <li><a href="staffReg.html">Staff Regitration</a></li>
-          <li><a href="staffUpDlt.html">Update/Delete Staff</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="icon-link">
-          <a href="attendance.html">
-            <i class="bx bx-calendar-check"></i>
-            <span class="link_name">Attendance</span>
-          </a>
-        </div>
-        <ul class="sub-menu blank">
-          <li class="link-name "><a href="attendance.html">Attendance</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="icon-link">
-          <a href="Payment.html">
-            <i class="bx bx-money"></i>
-            <span class="link_name">Payment</span>
-          </a>
-        </div>
-        <ul class="sub-menu blank">
-          <li><a href="Payment.html" class="link_name">Payment</a></li>
-        </ul>
-      </li>
-
-    </ul>
-    <ul class="nav-links">
-      <li>
-        <a href="">
-          <i class="bx bxs-grid"></i>
-          <span class="link_name">Dashboard</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a href="" class="link_name">Dashboard</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="icon-link">
-          <a href="student_view.php">
-            <i class="bx bxs-user-detail"></i>
-            <span class="link_name">Student</span>
-          </a>
-          <i class="bx bxs-chevron-down arrow"></i>
-        </div>
-        <ul class="sub-menu">
-          <li class="link-name"><a href="student_view.php">Student</a></li>
+          <li class="link-name"><a href="#">Student</a></li>
           <li><a href="student_reg.html">Student Regitration</a></li>
           <li><a href="studentEnrlmnt.html">Student Enrollment</a></li>
           <li><a href="studentUpDlt.html">Student Update/Delete</a></li>
@@ -343,34 +206,46 @@ if (isset($_POST['submit'])) {
 
   <section class="createClass">
     <h1 class="headerAclz">Create Class</h1>
-    <form action="" method="post" name="createClassF" class="createClassF">
+    <form action="" method="post" enctype="multipart/form-data" name="createClassF" class="createClassF">
+            <?php
+            $eid = $_GET['editid'];
+            $ret = mysqli_query($con, "select * from tblclass where ID='$eid'");
+            while ($row = mysqli_fetch_array($ret)) {
+            ?>
+
       <label for="courseId">Course ID:</label>
-      <select name="courseId" id="courseId" class="courseId" required>
-        <option value="p1">None</option>
-        <option value="p2">PHY22-24T</option>
-        <option value="p3">PHY23-25T</option>
-        <option value="p4">PHY22R</option>
-      </select><br>
+                <?php $valcourseId = $row['courseId']; ?>"
+                <?php
+                if ($r_set = $con->query("SELECT * from tblcourse")) {
+
+                    echo "<select id=courseId name=courseId>";
+                    while ($rowx = $r_set->fetch_assoc()) {
+                        echo "<option value=$rowx[ID]  ($rowx[courseName]=$valcourseId) ? ('selected') : (''); >$rowx[courseName]</option>";
+                    }
+                    echo "</select>";
+                } else {
+                    echo $con->error;
+                }
+                ?>
+        <br>
       <label for="classID">Class ID:</label>
-      <input type="text" id="classID" name="classID"><br>
+      <input type="text" id="classID" name="classID" value="<?php echo $row['classID']; ?>"><br>
       <label for="className">Class Name:</label>
-      <input type="text" id="className" name="className"><br>
+      <input type="text" id="className" name="className" value="<?php echo $row['className']; ?>"><br>
       <label for="clzStatus">Date and Time:</label>
-      <input type="datetime-local" name="classTD" id="classTD"><br>
+      <input type="datetime-local" name="clzTime" id="clzTime" value="<?php echo $row['clzTime']; ?>"><br>
       <label for="clzStatus">Status:</label>
-      <select id="clzStatus" name="clzStatus">
+      <select id="clzStatus" name="clzStatus" value="<?php echo $row['clzStatus']; ?>">
         <option value="held">Held</option>
         <option value="cancel">Cancel</option>
       </select><br>
 
       <br>
 
-      <input type="submit" value="Creat Class">
+            <?php } ?>
 
-
-
-
-    </form>
+        <br>
+        <input id="addCrse" type="submit" value="Update Class" name="submit">
 
   </section>
   <!-- Add class section ends -->
