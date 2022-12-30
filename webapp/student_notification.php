@@ -1,9 +1,53 @@
 <?php
 //database conection  file
 include('dbconnection.php');
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require 'phpmailer/src/Exception.php';
+require 'phpmailer/src/PHPMailer.php';
+require 'phpmailer/src/SMTP.php';
+
+
 //Code for deletion
-if (isset($_GET['delid'])) {
-  $rid = intval($_GET['delid']);
+if (isset($_GET['editid'])) {
+
+    $mail = new PHPMailer(true);                    // Passing `true` enables exceptions
+    try {
+        //Server settings
+        $mail->SMTPDebug = 2;                                 // Enable verbose debug output
+        $mail->isSMTP();                                      // Set mailer to use SMTP
+        $mail->Host = 'smtp.gmail.com';                  // Specify main and backup SMTP servers
+        $mail->SMTPAuth = true;                               // Enable SMTP authentication
+        $mail->Username = 'ekanyakekanchanamala@gmail.com';             // SMTP username
+        $mail->Password = 'kanchana23';                           // SMTP password
+        $mail->SMTPSecure = 'ssl';                            // Enable SSL encryption, TLS also accepted with port 465
+        $mail->Port = 465;                                    // TCP port to connect to
+
+        //Recipients
+        $mail->setFrom('ekanyakekanchanamala@gmail.com', 'Mailer');          //This is the email your form sends From
+        $mail->addAddress('ekanyakekanchanamala@gmail.com', 'Joe User'); // Add a recipient address
+        //$mail->addAddress('contact@example.com');               // Name is optional
+        //$mail->addReplyTo('info@example.com', 'Information');
+        //$mail->addCC('cc@example.com');
+        //$mail->addBCC('bcc@example.com');
+
+        //Attachments
+        //$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+        //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+
+        //Content
+        $mail->isHTML(true);                                  // Set email format to HTML
+        $mail->Subject = 'Subject line goes here';
+        $mail->Body    = 'Body text goes here';
+        //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+        $mail->send();
+        echo 'Message has been sent';
+    } catch (Exception $e) {
+        echo 'Message could not be sent.';
+        echo 'Mailer Error: ' . $mail->ErrorInfo;
+    }
 
 }
 $search = $_GET['search'] ?? '';
@@ -203,14 +247,11 @@ $student = $statement->fetchAll(PDO::FETCH_ASSOC);
                   </div>
                 </form>
               </div>
-              <div class="col-sm-4" align="right">
-                <a href="student_reg.php" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add New</span></a>
 
-              </div>
             </div>
           </div>
             <div class="col-sm-4">
-                <input class="button button1" type="submit" value="Send Email to All Student >>" name="submit">
+                 <a href="student_notification.php?editid=100" class="button button3" title="arrow" data-toggle="tooltip">Send Email to All Student </a>
             </div>
           <table class="table table-striped table-hover">
             <thead>
@@ -242,7 +283,7 @@ $student = $statement->fetchAll(PDO::FETCH_ASSOC);
                   <td> <?php echo $student['ContactNumber']; ?></td>
                   <td> <img style="width: 25px;background-size:100% 100%;" src="<?php echo $student['ProfilePicture']; ?>" name="ProfilePic" /></td>
                   <td>
-                    <a href="student_edit.php?editid=<?php echo htmlentities($student['ID']); ?>" class="arrow" title="arrow" data-toggle="tooltip"><i class="fas fa-angle-double-right">&#xE25d4;</i></a>
+
 
                   </td>
                 </tr>

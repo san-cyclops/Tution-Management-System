@@ -1,7 +1,7 @@
 <?php
 define('DB_HOST','localhost');
 define('DB_USER','root');
-define('DB_PASS','');
+define('DB_PASS','abc@123');
 define('DB_NAME','phpcrud');
 try
 {
@@ -13,7 +13,7 @@ catch (PDOException $e)
 	exit("Error: " . $e->getMessage());
 }
 
-$con=mysqli_connect("localhost", "root", "", "phpcrud");
+$con=mysqli_connect("localhost", "root", "abc@123", "phpcrud");
 if(mysqli_connect_errno())
 {
 echo "Connection Fail".mysqli_connect_error();

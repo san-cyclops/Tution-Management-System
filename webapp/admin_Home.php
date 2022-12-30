@@ -207,7 +207,7 @@
 
 
       <a href="class_view.php">CLASS</a>
-      <a href="notification.php">NOTIFICATION</a>
+      <a href="student_notification.php">NOTIFICATION</a>
       <a href="lecture_view.php">TUTOR</a>
       <!-- <a href="allFile.html">FILES</a>
       <a href="allStaff.html">STAFF</a> -->
