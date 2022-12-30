@@ -237,7 +237,7 @@ $student = $statement->fetchAll(PDO::FETCH_ASSOC);
           <div class="table-title">
             <div class="row">
               <div class="col-sm-4">
-                <h2> Notification <b> View </b></h2>
+                <h2> Notification Send <b> View </b></h2>
               </div>
               <div class="col-sm-4">
                 <form action="">
