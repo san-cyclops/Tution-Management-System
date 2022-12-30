@@ -1,8 +1,42 @@
 <?php
+session_start();
 //Database Connection
 include('dbconnection.php');
 require_once('function.php');
+$rfidno ="";
+$StudentID ="";
+$NIC ="";
+$StudentName ="";
+if (isset($_POST['submit'])) {
+
+    $rid = $_POST['rfid'];
+
+
+    $sql = mysqli_query($con, "select * from tblstudents where RFIDNumber=$rid");
+    $row = mysqli_num_rows($sql);
+    if ($row > 0) {
+        while ($row = mysqli_fetch_array($sql)) :
+            $rfidno = $row['RFIDNumber'];
+            $StudentID = $row['StudentID'];
+            $NIC = $row['NIC'];
+            $StudentName = $row['StudentName'];
+
+
+
+
+            echo "<script>alert('Data Available');</script>";
+
+        endwhile;
+    }
+    else{
+        echo "<script>alert('Data UnAvailable');</script>";
+    }
+
+
+
+}
 ?>
+
 
 
 
@@ -200,10 +234,13 @@ require_once('function.php');
 
     <hr />
     <div class="rfidTrack">
-      <label for="rfid">RFID Number:</label>
-      <input type="text" id="rfid" name="rfidnu" />
-        <button class="button button2"> Verify </button>
+        <form action="" method="post" enctype="multipart/form-data" name="addCourseF" class="addCourseF">
 
+      <label for="rfid">RFID Number:</label>
+      <input type="text" id="rfid" name="rfid" value="<?php echo $rfidno; ?>"/>
+       <input class="button button2" type="submit" id="addCrse" value="Verify" name="submit">
+
+        </form>
     </div>
     <hr />
     <div class="attendanceProcess">
@@ -211,27 +248,18 @@ require_once('function.php');
         <img src="img\avator.png" alt="userPicture" style="width: 200px; height: auto" />
         <br />
         <label for="sID">Student ID:</label>
-        <input type="text" id="sID" name="sID" disabled /><br />
-          <input type="text" value="<?php echo $row['StudentID']; ?>" id="sID" name="StudentID"><br>
+        <input type="text" id="rfidd" name="rfidd" value="<?php echo $StudentID; ?>"/>
         <label for="studentName">Student Name:</label>
-        <input type="text" id="sName" name="sName" disabled /><br />
-          <div class="clzDetails">
-              <label for="classId">Course ID:</label>
-              <select name="classId" id="classId" class="classId" required disabled>
-                  <option value="clz1">None</option>
-                  <option value="clz2">PHY22-24T-22/10/05</option>
-                  <option value="clz3">PHY23-25T-22/10/09</option>
-                  <option value="clz4">PHY22R-22/10/20</option>
-              </select>
-          </div>
+          <input type="text" id="sname" name="sname" value="<?php echo $StudentName; ?>"/>
+
       </div>
       <div class="payment-attendP">
         <div class="paymentDetails">
           <h1 class="paymentStatus">Payment Done</h1>
         </div>
         <div class="attendPermission">
-          <button name="attendAllow" id="attendAllow">Attend Allowed</button>
-          <button name="attendDeny" id="attendDeny">Attend Deny</button>
+          <a  class="button" href="attendance.php?delid=<?php echo ($rfidno); ?>" class="notiBtn" title="Delete" data-toggle="tooltip">Attend Allowed</a>
+          <a  class="button button3" href="attendance.php?delid=<?php echo ($rfidno); ?>" class="notiBtn" title="Delete" data-toggle="tooltip">Attend Deny</a>
         </div>
       </div>
     </div>

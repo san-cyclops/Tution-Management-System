@@ -158,9 +158,26 @@
         <img src="img\avator.png" />
       </div>
       <div class="adminDetails">
-        <h1>ADMIN</h1>
-        <h4 class="adminName">Kushani PathiranE</h4>
-        <h4 class="staffId">stf00001</h4>
+        <h1> <?php
+            if ($_SESSION['userRole'] == 1) {
+
+                echo "Student";
+
+            }
+            if ($_SESSION['userRole'] == 2) {
+
+                echo "Lecture";
+
+            }
+            if ($_SESSION['userRole'] == 3) {
+
+                echo "Admin";
+
+            }
+            ?>
+
+        </h1>
+        <h4 class="adminName"> <?php echo $_SESSION['uname']; ?></h4>
       </div>
     </div>
     <div class="adminLink">
@@ -178,7 +195,7 @@
       ?>
 
         <?php
-        if ($_SESSION['userRole'] == 2) {
+        if ($_SESSION['userRole'] == 1) {
         ?>
 
 
@@ -190,12 +207,13 @@
 
 
       <a href="class_view.php">CLASS</a>
-      <!-- <a href="allNotification.html">NOTIFICATION</a> -->
+      <a href="notification.php">NOTIFICATION</a>
       <a href="lecture_view.php">TUTOR</a>
       <!-- <a href="allFile.html">FILES</a>
       <a href="allStaff.html">STAFF</a> -->
         <a href="studentEnrlmnt_view.php">Student Enrlmnt</a>
       <a href="attendance.php">ATTENDANCE</a>
+
       <a href="Payment.html">PAYMENT</a>
     </div>
   </section>
