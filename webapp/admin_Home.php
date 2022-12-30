@@ -194,7 +194,7 @@
       <a href="lecture_view.php">TUTOR</a>
       <!-- <a href="allFile.html">FILES</a>
       <a href="allStaff.html">STAFF</a> -->
-        <a href="studentEnrlmnt.php">Student Enrlmnt</a>
+        <a href="studentEnrlmnt_view.php">Student Enrlmnt</a>
       <a href="attendance.php">ATTENDANCE</a>
       <a href="Payment.html">PAYMENT</a>
     </div>
