@@ -1,3 +1,6 @@
+ <?php
+    session_start();
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -107,6 +110,7 @@
         </ul>
       </li>
       <li>
+
         <a href="attendance.html">
           <i class="bx bx-calendar-check"></i>
           <span class="link_name">Attendance</span>
@@ -114,6 +118,8 @@
         <ul class="sub-menu blank">
           <li class="link-name"><a href="attendance.html">Attendance</a></li>
         </ul>
+
+
       </li>
       <li>
         <a href="Payment.html">
@@ -158,15 +164,39 @@
       </div>
     </div>
     <div class="adminLink">
-      <a href="student_view.php">STUDENT</a>
+        <?php
+       #     echo $_SESSION['uname'];
+       #     echo $_SESSION['userRole'];
+
+        if ($_SESSION['userRole'] == 1) {
+        ?>
+            <a href="student_view.php">STUDENT</a>
+
+          <?php
+        }
+
+      ?>
+
+        <?php
+        if ($_SESSION['userRole'] == 2) {
+        ?>
+
+
       <a href="course_view.php">COURSE</a>
+            <?php
+        }
+
+        ?>
+
+
       <a href="class_view.php">CLASS</a>
       <!-- <a href="allNotification.html">NOTIFICATION</a> -->
       <a href="lecture_view.php">TUTOR</a>
       <!-- <a href="allFile.html">FILES</a>
       <a href="allStaff.html">STAFF</a> -->
+        <a href="studentEnrlmnt.php">Student Enrlmnt</a>
       <a href="attendance.php">ATTENDANCE</a>
-      <!-- <a href="Payment.html">PAYMENT</a> -->
+      <a href="Payment.html">PAYMENT</a>
     </div>
   </section>
 

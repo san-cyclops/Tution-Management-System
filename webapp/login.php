@@ -1,4 +1,5 @@
  <?php
+    session_start();
     //database conection  file
     include('dbconnection.php');
     $required_msg = '';
@@ -10,14 +11,21 @@
 
         if ($uname != "" && $password != "") {
 
-            $sql_query = "select count(*) as cntUser from tblusers where username='" . $uname . "' and password='" . $password . "'";
+            $sql_query = "select * from tblusers where Email='" . $uname . "' and password='" . $password . "'";
             $result = mysqli_query($con, $sql_query);
-            $row = mysqli_fetch_array($result);
+            #$row = mysqli_fetch_array($result);
 
-            $count = $row['cntUser'];
+            //$count = $row['cntUser'];
+            //$userRole = $row['userRole'];
 
-            if ($count > 0) {
+             while ($row = mysqli_fetch_array($result)) :
+                 $email = $row['Email'];
+                 $userRole = $row['userRole'];
+             endwhile;
+
+            if ($email == $uname) {
                 $_SESSION['uname'] = $uname;
+                $_SESSION['userRole'] = $userRole;
                 header('Location: admin_Home.php');
             } else {
                 echo "Invalid username and password";

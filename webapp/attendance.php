@@ -68,7 +68,7 @@ require_once('function.php');
         <ul class="sub-menu">
           <li class="link-name"><a href="#">Student</a></li>
           <li><a href="student_reg.html">Student Regitration</a></li>
-          <li><a href="studentEnrlmnt.html">Student Enrollment</a></li>
+          <li><a href="studentEnrlmnt.php">Student Enrollment</a></li>
           <li><a href="studentUpDlt.html">Student Update/Delete</a></li>
         </ul>
       </li>

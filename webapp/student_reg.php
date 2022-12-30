@@ -42,8 +42,8 @@ if (isset($_POST['submit'])) {
   }
 
     $sql = mysqli_query($con, "delete from tblusers where username=$EmailAddress");
-    $query=mysqli_query($con, "insert into tblusers(FirstName,LastName, MobileNumber, Email, Address,CreationDate,username,password) 
-    value('$StudentName','', '$ContactNumber', '$EmailAddress', '$Address', NOW(),'$EmailAddress','$Password' )");
+    $query=mysqli_query($con, "insert into tblusers(FirstName,LastName, MobileNumber, Email, Address,CreationDate,username,password,userRole) 
+    value('$StudentName','', '$ContactNumber', '$EmailAddress', '$Address', NOW(),'$EmailAddress','$Password','1' )");
     if ($query) {
         echo "<script>alert('You have successfully inserted User data');</script>";
     }

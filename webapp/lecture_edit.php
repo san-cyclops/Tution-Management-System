@@ -58,17 +58,16 @@ if (isset($_POST['submit'])) {
     $query->bindParam(':eid', $eid, PDO::PARAM_STR, PDO::PARAM_STR);
     $query->execute();
 
+    <?php
     if ($query->execute()) {
         #echo "<script>alert('You have successfully Updated the data');</script>";
         #echo "<script type='text/javascript'> document.location ='lecture_view.php'; </script>";
-    } else {
-        echo "<script>alert('Something Went Wrong. Please try again');</script>";
-    }
+    ?>
 
     $sql = mysqli_query($con, "delete from tblusers where username=$email");
     #echo "<script>alert('Data deleted');</script>";
     $query=mysqli_query($con, "insert into tblusers(FirstName,LastName, MobileNumber, Email, Address,CreationDate,username,password,userRole) 
-    value('$tName','$tName', '$phone', '$email', '$address', NOW(),'$email','$password','' )");
+    value('$tName','$tName', '$phone', '$email', '$address', NOW(),'$email','$password','2' )");
     if ($query) {
         echo "<script>alert('You have successfully inserted User data');</script>";
         echo "<script type='text/javascript'> document.location ='lecture_view.php'; </script>";
