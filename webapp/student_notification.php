@@ -12,26 +12,35 @@ require 'phpmailer/src/SMTP.php';
 //Code for deletion
 if (isset($_GET['editid'])) {
 
-    $mail = new PHPMailer(); // create a new object
-    $mail->IsSMTP(); // enable SMTP
-    $mail->SMTPDebug = 0; // debugging: 1 = errors and messages, 2 = messages only
-    $mail->SMTPAuth = true; // authentication enabled
-    $mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for Gmail
-    $mail->Host = "smtp.gmail.com";
-    $mail->Port = 465; // or 587
-    $mail->IsHTML(true);
-    $mail->Username = "ekanayakekanchanamala@gmail.com";
-    $mail->Password = "rmqqcihbwzpqrham";
-    $mail->SetFrom("ekanayakekanchanamala@gmail.com");
-    $mail->Subject = "Test";
-    $mail->Body = "hello";
-    $mail->AddAddress("sancyclops@gmail.com");
+    $idno = '0070502098';
+    $statementmail = $dbh->prepare("SELECT a.id,a.RFIDNumber,b.StudentName,c.courseName,b.EmailAddress from tblstdenroll a inner join tblstudents b on a.RFIDNumber=b.RFIDNumber inner join tblcourse c on a.courseId=c.id");
+    $statementmail->execute();
+    $studentrec = $statementmail->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($studentrec as $i => $studentrec) {
+        $message = "Student Name - " . $studentrec['StudentName'] . " RFID Number- " . $studentrec["RFIDNumber"] . " Class Time Notified";
 
-    if(!$mail->Send()) {
-        echo "Mailer Error: " . $mail->ErrorInfo;
-    } else {
-        #echo "Message has been sent";
-        echo "<script>alert('Notification has been sent');</script>";
+        $mail = new PHPMailer(); // create a new object
+        $mail->IsSMTP(); // enable SMTP
+        $mail->SMTPDebug = 0; // debugging: 1 = errors and messages, 2 = messages only
+        $mail->SMTPAuth = true; // authentication enabled
+        $mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for Gmail
+        $mail->Host = "smtp.gmail.com";
+        $mail->Port = 465; // or 587
+        $mail->IsHTML(true);
+        $mail->Username = "ekanayakekanchanamala@gmail.com";
+        $mail->Password = "rmqqcihbwzpqrham";
+        $mail->SetFrom("ekanayakekanchanamala@gmail.com");
+        $mail->Subject = "Notification ";
+        $mail->Body = $message;
+        $mail->AddAddress($studentrec['EmailAddress']);
+
+        if (!$mail->Send()) {
+            echo "Mailer Error: " . $mail->ErrorInfo;
+        } else {
+            #echo "Message has been sent";
+            echo "<script>alert('Notification has been sent');</script>";
+            echo "<script>window.location.href = 'student_notification.php'</script>";
+        }
     }
 
 }
