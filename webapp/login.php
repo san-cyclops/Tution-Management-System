@@ -62,7 +62,7 @@
                          <a class="logo">
                              <img src="img/logo.png" alt="logo" /><span>eArN</span></a>
                          <div class="inputBox">
-                             <input type="text" id="txt_uname" name="txt_uname" placeholder="Username" />
+                             <input type="text" id="txt_uname" name="txt_uname" placeholder="Username" required/>
                          </div>
                          <div class="inputBox">
                              <input type="password" id="txt_pwd" name="txt_pwd" placeholder="Password" />
@@ -71,7 +71,10 @@
                              <input id="but_submit" type="submit" name="but_submit" value="Login" />
                          </div>
                          <div class="inputBox">
-                         <a href="#" type="submit" class="forget">Forget Password ?</a>
+
+                             <a class="forget" href = "javascript:;" onclick = "this.href='loginreset.php?value=' + document.getElementById('txt_uname').value">Forget Password ?</a>
+
+
                          </div></br>
                          <?= $required_msg ?>
                      </div>
