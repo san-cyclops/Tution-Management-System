@@ -49,7 +49,25 @@ if (isset($_POST['submit'])) {
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
     <title>Admin Portal/Student Enrollment</title>
 </head>
+<style>
+    .button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
 
+    .button1 {font-size: 10px;}
+    .button2 {font-size: 12px;}
+    .button3 {font-size: 16px;}
+    .button4 {font-size: 20px;}
+    .button5 {font-size: 24px;}
+</style>
 <body>
 <div class="sidebar close">
     <div class="logo-details">
@@ -178,7 +196,7 @@ if (isset($_POST['submit'])) {
         }
         ?>
         <div class="enrlUnerlBtn">
-            <input type="submit" id="Enroll" value="Enroll" name="submit">
+            <input class="button button1" type="submit" id="Enroll" value="Enroll" name="submit">
         </div>
     </form>
 </div>
