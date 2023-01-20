@@ -4,9 +4,9 @@ session_start();
 include('dbconnection.php');
 require_once('function.php');
 $this_file = str_replace('\\', '/', __File__) ;
-#$doc_root = $_SERVER['DOCUMENT_ROOT'];
-#$web_root =  str_replace (array($doc_root, "include/config.php") , '' , $this_file);
-define ('web_root' , $this_file);
+$doc_root = $_SERVER['DOCUMENT_ROOT'];
+$web_root =  str_replace (array($doc_root, "include/classmaterials.php") , '' , $this_file);
+define ('doc_root' , $this_file);
 
 $rfidno = "";
 $StudentID = "";
@@ -185,11 +185,21 @@ $title = "Class materials  ";
   <!-- Student Registration form section starts -->
   <section class="student-reg">
 
+      <div class="container-xl">
+          <div class="table-responsive">
+              <div class="table-wrapper">
+      <div class="row">
+          <div class="col-sm-5">
 
+          </div>
+          <div class="col-sm-7" align="right">
+              <a href="classmaterialsupload.php" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add New Class Materials</span></a>
 
+          </div>
+      </div>
 
       <h1><?php echo $title;?></h1>
-      <div class="col-lg-6">
+      <div class="col-lg-10">
           <h3>PDF</h3>
           <div class="table-responsive">
               <table id="example" class="table table-bordered">
@@ -225,7 +235,7 @@ $title = "Class materials  ";
               </table>
           </div>
       </div>
-      <div class="col-lg-6">
+      <div class="col-lg-10">
           <h3>VIDEO</h3>
           <div class="table-responsive">
               <table id="example2" class="table table-bordered">
@@ -256,7 +266,9 @@ $title = "Class materials  ";
           </div>
       </div>
 
-
+              </div>
+          </div>
+      </div>
 
 
   </section>

@@ -352,7 +352,7 @@ if (isset($_GET['delid'])) {
                   <!--Fetch the Records -->
                   <tr>
                     <td><?php echo $cnt; ?></td>
-                    <td><?php echo $row['courseId']; ?> </td>
+                    <td><?php echo $row['courseID']; ?> </td>
                     <td><?php echo $row['classID']; ?></td>
                     <td><?php echo $row['className']; ?></td>
                     <td> <?php echo $row['clzStatus']; ?></td>
